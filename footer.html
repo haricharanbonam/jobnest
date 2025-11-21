@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      background-color: #f8f9fa;
+      padding: 40px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #333;
+      border-top: 1px solid #ddd;
+    }
+
+    .footer-left {
+      flex: 1;
+      min-width: 200px;
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: #0057ff;
+      margin-bottom: 15px;
+    }
+
+    .social-icons a {
+      margin-right: 10px;
+      color: #333;
+      font-size: 18px;
+      text-decoration: none;
+    }
+
+    .footer-links {
+      flex: 2;
+      display: flex;
+      justify-content: space-between;
+      min-width: 300px;
+    }
+
+    .footer-links div a {
+      display: block;
+      margin: 4px 0;
+      text-decoration: none;
+      color: #333;
+    }
+
+    .footer-links div a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-app {
+      flex: 1;
+      min-width: 250px;
+    }
+
+    .footer-app strong {
+      font-size: 16px;
+    }
+
+    .footer-app p {
+      margin: 5px 0 10px;
+    }
+
+    .app-buttons img {
+      margin-right: 10px;
+    }
+  </style>
+  <body>
+    <footer class="footer">
+      <div class="footer-left">
+        <div class="logo">JobNest</div>
+        <div class="social-icons">
+          <a href="#"><i class="fab fa-facebook"></i></a>
+          <a href="#"><i class="fab fa-instagram"></i></a>
+          <a href="#"><i class="fab fa-x-twitter"></i></a>
+          <a href="#"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </div>
+
+      <div class="footer-links">
+        <div>
+          <a href="#">About us</a><br />
+          <a href="#">Careers</a><br />
+          <a href="#">Post a Job</a><br />
+          <a href="#">Sitemap</a><br />
+          <a href="#">Credits</a>
+        </div>
+        <div>
+          <a href="#">Help Center</a><br />
+          <a href="#">Grievances</a><br />
+          <a href="#">Report issue</a>
+        </div>
+        <div>
+          <a href="#">Privacy policy</a><br />
+          <a href="#">Terms & Conditions</a><br />
+          <a href="#">Trust & Safety</a>
+        </div>
+      </div>
+
+      <div class="footer-app">
+        <strong>Apply on the go</strong>
+        <p>Get real-time job updates on our app</p>
+        <div class="app-buttons">
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+            alt="Google Play"
+            height="40"
+          />
+          <img
+            src="https://upload.wikimedia.org/wikipedia/commons/9/96/Download_on_the_App_Store_Badge.svg"
+            alt="App Store"
+            height="40"
+          />
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

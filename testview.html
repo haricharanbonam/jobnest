@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>JavaScript Test - JobNest</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      body {
+        font-family: "Segoe UI", sans-serif;
+        background-color: #f9f9f9;
+        margin: 0;
+        padding: 0;
+      }
+
+      .container {
+        max-width: 1000px;
+        margin: 40px auto;
+        background: white;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        padding: 30px;
+      }
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .test-info {
+        display: flex;
+        align-items: center;
+      }
+
+      .logo {
+        width: 60px;
+        height: 60px;
+        background-color: #eee;
+        border-radius: 12px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-right: 15px;
+        font-size: 30px;
+        color: #9147ff;
+      }
+
+      .test-meta h2 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .test-meta p {
+        margin: 4px 0;
+        color: #666;
+      }
+
+      .take-test-btn {
+        background-color: #7c3aed;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 8px;
+        font-size: 15px;
+        cursor: pointer;
+      }
+
+      .nav-tabs {
+        display: flex;
+        gap: 25px;
+        border-bottom: 1px solid #ddd;
+        margin-top: 25px;
+      }
+
+      .nav-tabs div {
+        padding: 10px 0;
+        cursor: pointer;
+        font-weight: 500;
+        color: #9147ff;
+        border-bottom: 3px solid #9147ff;
+      }
+
+      .test-section {
+        margin-top: 25px;
+      }
+
+      .highlight-icons {
+        display: flex;
+        gap: 25px;
+        font-size: 16px;
+        margin-bottom: 15px;
+        color: #444;
+      }
+
+      .highlight-icons i {
+        margin-right: 8px;
+        color: #9147ff;
+      }
+
+      .info-alert {
+        background-color: #fff8e5;
+        border-left: 4px solid #ffcc00;
+        padding: 15px;
+        font-size: 15px;
+        color: #444;
+        margin: 15px 0;
+        border-radius: 8px;
+      }
+
+      .badge {
+        float: right;
+        background: #ffedd5;
+        padding: 12px 18px;
+        border-radius: 10px;
+        border: 1px solid #fbbf24;
+        color: #b45309;
+        font-weight: bold;
+        text-align: center;
+        margin-top: -60px;
+      }
+
+      .test-details {
+        margin-top: 30px;
+      }
+
+      .test-details h3 {
+        font-size: 18px;
+        color: #333;
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <div class="test-info">
+          <div class="logo"><i class="fab fa-js-square"></i></div>
+          <div class="test-meta">
+            <h2>JavaScript Test</h2>
+            <p><i class="fas fa-users"></i> 3000+ test taken</p>
+          </div>
+        </div>
+        <button
+          class="take-test-btn"
+          onclick="window.location.href='test.html'"
+        >
+          Take Free Test
+        </button>
+      </div>
+
+      <div class="nav-tabs">
+        <div>Highlights</div>
+        <div>Test Details</div>
+        <div>Benefits</div>
+        <div>Opportunity</div>
+        <div>Syllabus</div>
+      </div>
+
+      <div class="test-section">
+        <h3>Test Highlights</h3>
+        <div class="highlight-icons">
+          <span><i class="fas fa-network-wired"></i> 1 Round (25 mins)</span>
+          <span><i class="fas fa-redo"></i> Max attempts: 3</span>
+        </div>
+
+        <div class="info-alert">
+          <i class="fas fa-lock"></i> Your results are confidential.
+          <a href="#" style="color: #9147ff; text-decoration: underline"
+            >Know more</a
+          >
+        </div>
+
+        <div class="badge">
+          Score 50%<br />
+          to earn a badge
+        </div>
+      </div>
+
+      <div class="test-details">
+        <h3>Test Details</h3>
+        <p>
+          Round 1 includes MCQs on JavaScript fundamentals, coding logic, and
+          DOM-based questions.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>

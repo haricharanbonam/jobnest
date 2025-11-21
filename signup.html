@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .btn {
+      padding: 10px 22px;
+      text-decoration: none;
+      border-radius: 6px;
+      font-size: 16px;
+      border: 1px solid transparent;
+      transition: 0.3s ease;
+    }
+
+    .login {
+      border: 1.5px solid #0057ff;
+      color: #0057ff;
+      background-color: white;
+    }
+
+    .login:hover {
+      background-color: #0057ff;
+      color: white;
+    }
+
+    .signup {
+      background-color: #0057ff;
+      color: white;
+    }
+
+    .signup:hover {
+      background-color: #003fcc;
+    }
+    .register-section {
+      padding: 50px;
+      background-color: #f9f9f9;
+      font-family: Arial, sans-serif;
+    }
+
+    .register-container {
+      max-width: 500px;
+      margin: auto;
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .register-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .register-form label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    .register-form input,
+    .register-form select {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .register-form button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0072ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .register-form button:hover {
+      background-color: #005fd1;
+    }
+
+    .login-link {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .login-link a {
+      color: #0072ff;
+      text-decoration: none;
+    }
+
+    .login-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <body>
+    <div id="header-container"></div>
+
+    <section class="register-section">
+      <div class="register-container">
+        <h2>Create Your Account</h2>
+        <form action="#" method="post" class="register-form" id="registerForm">
+          <label>Full Name</label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter your full name"
+            required
+          />
+
+          <label>Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+          />
+
+          <label>Password</label>
+          <input type="password" placeholder="Create a password" required />
+
+          <label>Confirm Password</label>
+          <input
+            type="password"
+            placeholder="Re-enter your password"
+            required
+          />
+
+          <label>Phone Number</label>
+          <input type="tel" placeholder="Enter your phone number" />
+
+          <label>Gender</label>
+          <select>
+            <option>Select Gender</option>
+            <option>Male</option>
+            <option>Female</option>
+            <option>Other</option>
+          </select>
+
+          <label>Date of Birth</label>
+          <input type="date" />
+
+          <label>Location</label>
+          <input type="text" placeholder="Enter your city or location" />
+
+          <label>Upload Resume</label>
+          <input type="file" />
+
+          <label>Portfolio or LinkedIn (optional)</label>
+          <input type="url" id="portfolio" placeholder="Paste URL" />
+
+          <button type="submit">Register</button>
+
+          <p class="login-link">
+            Already have an account? <a href="login.html">Login</a>
+          </p>
+        </form>
+      </div>
+    </section>
+
+    <div id="footer-container"></div>
+
+    <script>
+      function loadHTML(elementId, filePath) {
+        fetch(filePath)
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById(elementId).innerHTML = data;
+          })
+          .catch((error) => console.error("Error loading the file:", error));
+      }
+
+      // Load header and footer
+      loadHTML("header-container", "nav.html");
+      loadHTML("footer-container", "footer.html");
+
+      // Store only selected fields on form submit
+      document
+        .getElementById("registerForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const name = document.getElementById("name").value;
+          const email = document.getElementById("email").value;
+          const portfolio = document.getElementById("portfolio").value;
+
+          const userData = {
+            name,
+            email,
+            portfolio,
+          };
+
+          localStorage.setItem("userData", JSON.stringify(userData));
+          localStorage.setItem("isLoggedIn", "true");
+
+          alert("Registration successful!");
+          window.location.href = "login.html";
+        });
+    </script>
+  </body>
+</html>

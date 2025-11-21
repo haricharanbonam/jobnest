@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Recruiter Login</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f7f7f7;
+        margin: 0;
+        padding: 0;
+      }
+
+      .login-container {
+        width: 350px;
+        margin: 80px auto;
+        padding: 30px;
+        background-color: white;
+        border: 1px solid #ccc;
+        box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      .login-container h2 {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .login-container label {
+        display: block;
+        margin: 10px 0 5px;
+        font-size: 14px;
+      }
+
+      .login-container input[type="text"],
+      .login-container input[type="password"] {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border: 1px solid #aaa;
+        box-sizing: border-box;
+      }
+
+      .login-container button {
+        width: 100%;
+        padding: 10px;
+        background-color: #27ae60;
+        color: white;
+        border: none;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      .login-container button:hover {
+        background-color: #219150;
+      }
+
+      .login-container p {
+        margin-top: 15px;
+        text-align: center;
+        font-size: 14px;
+      }
+
+      .login-container a {
+        text-decoration: none;
+        color: #2980b9;
+      }
+
+      .login-container a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <h2>Recruiter Login</h2>
+      <form>
+        <label for="email">Email or Username</label>
+        <input
+          type="text"
+          id="email"
+          name="email"
+          placeholder="Enter your email"
+        />
+
+        <label for="password">Password</label>
+        <input
+          type="password"
+          id="password"
+          name="password"
+          placeholder="Enter your password"
+        />
+
+        <button
+          type="button"
+          onclick="window.location.href='recdashboard.html'"
+        >
+          Login
+        </button>
+
+        <p>Don't have an account? <a href="recsignup.html">Sign up here</a></p>
+      </form>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Become a Mentor</title>
+    <style>
+      :root {
+        --primary-color: #4a6fa5;
+        --secondary-color: #166088;
+        --accent-color: #4fc3f7;
+        --light-color: #f8f9fa;
+        --dark-color: #343a40;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        color: #333;
+        background-color: #f5f7fa;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Hero Section */
+      .mentor-hero {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+        border-radius: 10px;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .mentor-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80")
+          center/cover;
+        opacity: 0.2;
+        z-index: 0;
+      }
+
+      .mentor-hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .mentor-hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+
+      .mentor-hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .quote {
+        font-style: italic;
+        font-size: 1.1rem;
+        margin: 30px 0;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-left: 4px solid var(--accent-color);
+        border-radius: 0 5px 5px 0;
+      }
+
+      .btn-mentor {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-mentor:hover {
+        background-color: #3da8d8;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Mentor Form Section */
+      .mentor-form-container {
+        display: none;
+        background-color: white;
+        border-radius: 10px;
+        padding: 40px;
+        margin-top: 40px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .mentor-form h2 {
+        color: var(--secondary-color);
+        margin-top: 0;
+        margin-bottom: 30px;
+        font-size: 1.8rem;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+      }
+
+      .form-group {
+        margin-bottom: 25px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: 600;
+        color: var(--dark-color);
+      }
+
+      .form-group input[type="text"],
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 12px 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 1rem;
+        transition: border 0.3s;
+      }
+
+      .form-group input[type="text"]:focus,
+      .form-group select:focus,
+      .form-group textarea:focus {
+        border-color: var(--accent-color);
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(79, 195, 247, 0.2);
+      }
+
+      .form-group textarea {
+        min-height: 120px;
+        resize: vertical;
+      }
+
+      .checkbox-options,
+      .radio-options {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .checkbox-option,
+      .radio-option {
+        display: flex;
+        align-items: center;
+      }
+
+      .checkbox-option input,
+      .radio-option input {
+        margin-right: 8px;
+      }
+
+      .form-divider {
+        border-top: 1px solid #eee;
+        margin: 30px 0;
+      }
+
+      .form-footer {
+        text-align: center;
+        margin-top: 30px;
+        font-size: 0.9rem;
+        color: #666;
+      }
+
+      .submit-btn {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 5px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s;
+        display: block;
+        width: 100%;
+        max-width: 200px;
+        margin: 30px auto 0;
+      }
+
+      .submit-btn:hover {
+        background-color: var(--secondary-color);
+        transform: translateY(-2px);
+      }
+
+      /* Highlights */
+      .highlights {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin: 40px 0;
+        gap: 20px;
+      }
+
+      .highlight {
+        flex: 1;
+        min-width: 250px;
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        text-align: center;
+        transition: transform 0.3s;
+      }
+
+      .highlight:hover {
+        transform: translateY(-5px);
+      }
+
+      .highlight-icon {
+        font-size: 2.5rem;
+        color: var(--accent-color);
+        margin-bottom: 15px;
+      }
+
+      .highlight h3 {
+        color: var(--secondary-color);
+        margin-top: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Hero Section -->
+      <section class="mentor-hero">
+        <div class="mentor-hero-content">
+          <h1>Become a Mentor</h1>
+          <p>
+            Share your knowledge, guide the next generation, and grow as a
+            professional by becoming a mentor in our community.
+          </p>
+
+          <div class="quote">
+            "A mentor is someone who allows you to see the hope inside
+            yourself."<br />
+            — Oprah Winfrey
+          </div>
+
+          <button id="showFormBtn" class="btn-mentor">
+            Become a Mentor Today
+          </button>
+        </div>
+      </section>
+
+      <!-- Highlights Section -->
+      <div class="highlights">
+        <div class="highlight">
+          <div class="highlight-icon">🌟</div>
+          <h3>Make an Impact</h3>
+          <p>
+            Guide students and young professionals in their career journeys.
+          </p>
+        </div>
+        <div class="highlight">
+          <div class="highlight-icon">💡</div>
+          <h3>Share Knowledge</h3>
+          <p>Pass on your expertise and industry insights.</p>
+        </div>
+        <div class="highlight">
+          <div class="highlight-icon">🌱</div>
+          <h3>Grow Your Network</h3>
+          <p>
+            Connect with talented individuals and expand your professional
+            circle.
+          </p>
+        </div>
+      </div>
+
+      <!-- Mentor Form (Hidden by default) -->
+      <div id="mentorFormContainer" class="mentor-form-container">
+        <form class="mentor-form">
+          <h2>Become a Mentor</h2>
+
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" value=""  />
+          </div>
+
+          <div class="form-group">
+            <label for="stream">Which stream you belong to?</label>
+            <select id="stream" required>
+              <option value="">Select your stream</option>
+              <option value="Engineering">Engineering</option>
+              <option value="Medicine">Medicine</option>
+              <option value="Business">Business</option>
+              <option value="Arts">Arts</option>
+              <option value="Science">Science</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-divider"></div>
+
+          <div class="form-group">
+            <label
+              >On what topics do you think you can mentor? [Any Thesis] *</label
+            >
+            <div class="checkbox-options">
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="topics"
+                  value="Academic related studies"
+                />
+                Academic related studies
+              </label>
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="topics"
+                  value="Academic related projects"
+                />
+                Academic related projects
+              </label>
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="topics"
+                  value="Guidance to develop technical skills"
+                />
+                Guidance to develop technical skills
+              </label>
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="topics"
+                  value="Technology support guidance"
+                />
+                Technology support guidance
+              </label>
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="topics"
+                  value="Internship expert/guidance"
+                />
+                Internship expert/guidance
+              </label>
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="topics"
+                  value="Guidance for higher studies"
+                />
+                Guidance for higher studies
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="topics" value="Other" /> Other
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Who would you like to mentor? *</label>
+            <div class="radio-options">
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="mentee-level"
+                  value="1st Year"
+                  required
+                />
+                1st Year
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="mentee-level" value="2nd Year" /> 2nd
+                Year
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="mentee-level" value="3rd Year" /> 3rd
+                Year
+              </label>
+            </div>
+          </div>
+
+          <div class="form-divider"></div>
+
+          <div class="form-group">
+            <label for="mentor-domains"
+              >Mentor domains in which you can mentor others *</label
+            >
+            <textarea
+              id="mentor-domains"
+              placeholder="For ex: Engineering, Medical, Education"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="mentor-skills">Mentor your skills *</label>
+            <textarea
+              id="mentor-skills"
+              placeholder="For ex: Leadership, Communication, Designing, Programming"
+              required
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="frequency">Frequency of mentoring *</label>
+            <select id="frequency" required>
+              <option value="">Select frequency</option>
+              <option value="Weekly">Weekly</option>
+              <option value="Bi-weekly">Bi-weekly</option>
+              <option value="Monthly">Monthly</option>
+              <option value="As needed">As needed</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label
+              >What is your preferred time for a mentoring session? *</label
+            >
+            <div class="radio-options">
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="session-time"
+                  value="30 mins"
+                  required
+                />
+                30 mins
+              </label>
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="session-time"
+                  value="30 mins - 1 hour"
+                />
+                30 mins - 1 hour
+              </label>
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="session-time"
+                  value="1 hour - 1.5 hour"
+                />
+                1 hour - 1.5 hour
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="session-time" value="Other" /> Other
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label
+              >What will be the most comfortable way in which you can mentor
+              others? *</label
+            >
+            <div class="radio-options">
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="mentoring-method"
+                  value="Video call"
+                  required
+                />
+                Video call
+              </label>
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="mentoring-method"
+                  value="Phone call"
+                />
+                Phone call
+              </label>
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="mentoring-method"
+                  value="Text messaging"
+                />
+                Text messaging
+              </label>
+              <label class="radio-option">
+                <input
+                  type="radio"
+                  name="mentoring-method"
+                  value="Any of the above"
+                />
+                Any of the above
+              </label>
+              <label class="radio-option">
+                <input type="radio" name="mentoring-method" value="Other" />
+                Other
+              </label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="mentee-message">A message to your mentees</label>
+            <textarea
+              id="mentee-message"
+              placeholder="Write something about yourself and how you can help mentees."
+            ></textarea>
+          </div>
+
+          <div class="form-group">
+            <label
+              >According to you, what benefits can you get by mentoring someone?
+              *</label
+            >
+            <p class="form-footer">
+              For feedback purposes only, will not be shared with anyone.
+            </p>
+            <div class="checkbox-options">
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="benefits"
+                  value="Get presence among alumni"
+                />
+                Get presence among alumni
+              </label>
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="benefits"
+                  value="Increasing social media presence"
+                />
+                Increasing social media presence
+              </label>
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="benefits"
+                  value="Opportunity for self-reflection"
+                />
+                Opportunity for self-reflection
+              </label>
+              <label class="checkbox-option">
+                <input
+                  type="checkbox"
+                  name="benefits"
+                  value="Developing mentoring skills"
+                />
+                Developing mentoring skills
+              </label>
+              <label class="checkbox-option">
+                <input type="checkbox" name="benefits" value="Other" /> Other
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">Submit Application</button>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("showFormBtn")
+        .addEventListener("click", function () {
+          const formContainer = document.getElementById("mentorFormContainer");
+          formContainer.style.display = "block";
+
+          // Smooth scroll to the form
+          formContainer.scrollIntoView({ behavior: "smooth" });
+        });
+
+      document
+        .querySelector(".mentor-form")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          alert(
+            "Thank you for your application to become a mentor! We will review your information and get back to you soon."
+          );
+          // Here you would typically send the form data to your server
+        });
+    </script>
+  </body>
+</html>

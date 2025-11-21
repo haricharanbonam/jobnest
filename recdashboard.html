@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Recruiter Dashboard</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background-color: #f5f5f5;
+      }
+
+      /* Simple Navbar */
+      .recruiter-navbar {
+        background-color: #333;
+        color: white;
+        padding: 15px 30px;
+      }
+
+      .recruiter-navbar h2 {
+        margin: 0;
+        font-size: 22px;
+      }
+
+      /* Page Heading */
+      .page-title {
+        text-align: center;
+        margin: 30px 0 10px;
+        font-size: 24px;
+      }
+
+      /* Form Styling */
+      .form-container {
+        width: 90%;
+        margin: 20px auto;
+        background-color: white;
+        padding: 20px;
+        border: 1px solid #ccc;
+      }
+
+      .form-container input {
+        width: 100%;
+        padding: 8px;
+        margin: 10px 0;
+        border: 1px solid #aaa;
+      }
+
+      .form-container button {
+        padding: 8px 16px;
+        background-color: #4caf50;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      .form-container button:hover {
+        background-color: #45a049;
+      }
+
+      /* Table */
+      table {
+        width: 90%;
+        margin: 0 auto 50px auto;
+        border-collapse: collapse;
+        background-color: white;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      th,
+      td {
+        padding: 12px 15px;
+        border: 1px solid #ccc;
+        text-align: center;
+      }
+
+      th {
+        background-color: #4caf50;
+        color: white;
+      }
+
+      tr:nth-child(even) {
+        background-color: #f2f2f2;
+      }
+
+      .view-btn {
+        padding: 5px 10px;
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        cursor: pointer;
+      }
+
+      .view-btn:hover {
+        background-color: #216a9c;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Navbar -->
+    <div class="recruiter-navbar">
+      <h2>Recruiter Panel</h2>
+    </div>
+
+    <!-- Heading -->
+    <h2 class="page-title">Post a New Job</h2>
+
+    <!-- Job Posting Form -->
+    <div class="form-container">
+      <input type="text" id="jobName" placeholder="Job Name" required />
+      <input
+        type="text"
+        id="qualification"
+        placeholder="Qualification Required"
+        required
+      />
+      <input type="text" id="skills" placeholder="Required Skills" required />
+      <input
+        type="number"
+        id="applications"
+        placeholder="No. of Applications"
+        required
+      />
+      <button onclick="addJob()">Post Job</button>
+    </div>
+
+    <!-- Heading -->
+    <h2 class="page-title">List of Jobs</h2>
+
+    <!-- Table -->
+    <table id="jobTable">
+      <tr>
+        <th>Job Name</th>
+        <th>Qualification</th>
+        <th>Required Skills</th>
+        <th>No. of Applications</th>
+        <th>Action</th>
+      </tr>
+      <tr>
+        <td>Frontend Developer</td>
+        <td>B.Tech CSE</td>
+        <td>HTML, CSS, JS</td>
+        <td>12</td>
+        <td>
+          <button class="view-btn" onclick="location.href='view.html'">
+            View
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>Backend Developer</td>
+        <td>B.Tech IT</td>
+        <td>Node.js, Express</td>
+        <td>8</td>
+        <td>
+          <button class="view-btn" onclick="location.href='view.html'">
+            View
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>Data Analyst</td>
+        <td>B.Sc Statistics</td>
+        <td>Excel, Python</td>
+        <td>20</td>
+        <td>
+          <button class="view-btn" onclick="location.href='view.html'">
+            View
+          </button>
+        </td>
+      </tr>
+      <tr>
+        <td>Java Developer</td>
+        <td>B.Tech CSE</td>
+        <td>Java, OOPs</td>
+        <td>15</td>
+        <td><button class="view-btn">View</button></td>
+      </tr>
+      <tr>
+        <td>UI Designer</td>
+        <td>Any Graduate</td>
+        <td>Figma, Adobe XD</td>
+        <td>6</td>
+        <td>
+          <button class="view-btn" onclick="location.href='view.html'">
+            View
+          </button>
+        </td>
+      </tr>
+    </table>
+
+    <script>
+      function addJob() {
+        const name = document.getElementById("jobName").value;
+        const qual = document.getElementById("qualification").value;
+        const skills = document.getElementById("skills").value;
+        const apps = document.getElementById("applications").value;
+
+        if (!name || !qual || !skills || !apps) {
+          alert("Please fill in all fields.");
+          return;
+        }
+
+        const table = document.getElementById("jobTable");
+        const row = table.insertRow(-1);
+        row.innerHTML = `
+        <td>${name}</td>
+        <td>${qual}</td>
+        <td>${skills}</td>
+        <td>${apps}</td>
+        <td><button class="view-btn">View</button></td>
+      `;
+
+        // Reset form fields
+        document.getElementById("jobName").value = "";
+        document.getElementById("qualification").value = "";
+        document.getElementById("skills").value = "";
+        document.getElementById("applications").value = "";
+      }
+    </script>
+  </body>
+</html>

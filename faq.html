@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobNest FAQs</title>
+    <style>
+
+
+      .faq-container {
+        max-width: 900px;
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+
+      .faq-item {
+        margin-bottom: 10px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 15px 0;
+      }
+
+      .faq-question span {
+        font-size: 18px;
+        color: #333;
+      }
+
+      .toggle-button {
+        background-color: transparent;
+        border: none;
+        font-size: 20px;
+        color: #333;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .toggle-button:hover {
+        color: #007bff;
+      }
+
+      .faq-answer {
+        padding: 10px 0;
+        display: none; /* Initially hidden */
+      }
+
+      .faq-answer p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="faq-container">
+      <h2>FAQs</h2>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What is JobNest?</span>
+          <button class="toggle-button">+</button>
+        </div>
+        <div class="faq-answer">
+          <p>
+            JobNest is an online platform that connects job seekers and
+            recruiters. We provide a seamless experience for candidates to apply
+            for jobs and for employers to find the right talent.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How do I create an account on JobNest?</span>
+          <button class="toggle-button">+</button>
+        </div>
+        <div class="faq-answer">
+          <p>
+            To create an account, click the "Sign Up" button on the homepage.
+            Fill in your details, choose whether you're a job seeker or a
+            recruiter, and complete the registration process.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How can I apply for a job on JobNest?</span>
+          <button class="toggle-button">+</button>
+        </div>
+        <div class="faq-answer">
+          <p>
+            After signing in, browse through available job listings based on
+            your skills and preferences. Click on the job you’re interested in,
+            review the details, and click "Apply" to submit your application.
+          </p>
+        </div>
+      </div>
+
+      <!-- Add more FAQ items as needed -->
+    </div>
+
+    <script>
+      // Toggle functionality for FAQ items
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        const question = item.querySelector(".faq-question");
+        const answer = item.querySelector(".faq-answer");
+
+        question.addEventListener("click", () => {
+          // Toggle the visibility of the answer
+          if (answer.style.display === "block") {
+            answer.style.display = "none";
+            question.querySelector(".toggle-button").textContent = "+";
+          } else {
+            answer.style.display = "block";
+            question.querySelector(".toggle-button").textContent = "-";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>

@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      .jobs {
+        color: red;
+        position: relative;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .jobs::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 2px;
+        background-color: red;
+      }
+      .popular-categories {
+        padding: 50px 0;
+        background-color: #f8f9fa;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
+
+      .main-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: #2c3e50;
+        margin-bottom: 40px;
+        position: relative;
+      }
+
+      .main-title::after {
+        content: "";
+        display: block;
+        width: 80px;
+        height: 4px;
+        background: #3498db;
+        margin: 15px auto 0;
+      }
+
+      .category-box {
+        display: inline-block;
+        width: calc(20% - 20px);
+        margin: 10px;
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        vertical-align: top;
+      }
+
+      .category-box:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .category-icon {
+        width: 60px;
+        height: 60px;
+        background: #e3f2fd;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px;
+        color: #3498db;
+        font-size: 24px;
+      }
+
+      .category-content {
+        text-align: center;
+      }
+
+      .category-content h3 {
+        color: #2c3e50;
+        margin-bottom: 10px;
+        font-size: 1.2rem;
+      }
+
+      .category-content p {
+        color: #7f8c8d;
+        font-size: 0.9rem;
+        margin: 0;
+      }
+    </style>
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="header-container"></div>
+    <section
+      class="popular-categories"
+      onclick="window.location.href='temp4.html'"
+    >
+      <div class="container">
+        <h1 class="main-title">Popular Categories</h1>
+
+        <!-- Work From Home Category -->
+        <div class="category-box">
+          <div class="category-icon">
+            <i class="fas fa-laptop-house"></i>
+          </div>
+          <div class="category-content">
+            <h3>Work From Home</h3>
+            <p>Remote job opportunities</p>
+          </div>
+        </div>
+
+        <!-- HR Category -->
+        <div class="category-box">
+          <div class="category-icon">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="category-content">
+            <h3>HR</h3>
+            <p>Human Resources positions</p>
+          </div>
+        </div>
+
+        <!-- Sales Category -->
+        <div class="category-box">
+          <div class="category-icon">
+            <i class="fas fa-handshake"></i>
+          </div>
+          <div class="category-content">
+            <h3>Sales</h3>
+            <p>Sales and business development</p>
+          </div>
+        </div>
+
+        <!-- Accounting Category -->
+        <div class="category-box">
+          <div class="category-icon">
+            <i class="fas fa-calculator"></i>
+          </div>
+          <div class="category-content">
+            <h3>Accounting</h3>
+            <p>Finance and accounting roles</p>
+          </div>
+        </div>
+
+        <!-- Customer Support Category -->
+        <div class="category-box">
+          <div class="category-icon">
+            <i class="fas fa-headset"></i>
+          </div>
+          <div class="category-content">
+            <h3>Customer Support</h3>
+            <p>Client service positions</p>
+          </div>
+        </div>
+
+        <!-- IT Category -->
+        <div class="category-box">
+          <div class="category-icon">
+            <i class="fas fa-laptop-code"></i>
+          </div>
+          <div class="category-content">
+            <h3>IT</h3>
+            <p>Information technology jobs</p>
+          </div>
+        </div>
+
+        <!-- SQL Category -->
+        <div class="category-box">
+          <div class="category-icon">
+            <i class="fas fa-database"></i>
+          </div>
+          <div class="category-content">
+            <h3>SQL</h3>
+            <p>Database management roles</p>
+          </div>
+        </div>
+
+        <!-- Oracle Category -->
+        <div class="category-box">
+          <div class="category-icon">
+            <i class="fas fa-server"></i>
+          </div>
+          <div class="category-content">
+            <h3>Oracle</h3>
+            <p>Oracle specialist positions</p>
+          </div>
+        </div>
+
+        <!-- Graphic Design Category -->
+        <div class="category-box">
+          <div class="category-icon">
+            <i class="fas fa-paint-brush"></i>
+          </div>
+          <div class="category-content">
+            <h3>Graphic Design</h3>
+            <p>Creative design jobs</p>
+          </div>
+        </div>
+
+        <!-- Digital Marketing Category -->
+        <div class="category-box">
+          <div class="category-icon">
+            <i class="fas fa-bullhorn"></i>
+          </div>
+          <div class="category-content">
+            <h3>Digital Marketing</h3>
+            <p>Online marketing positions</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <div id="footer-container"></div>
+    <script>
+      function loadHTML(elementId, filePath) {
+        fetch(filePath)
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById(elementId).innerHTML = data;
+          })
+          .catch((error) => console.error("Error loading the file:", error));
+      }
+
+      // Load header and footer
+      loadHTML("header-container", "nav.html");
+      loadHTML("footer-container", "footer.html");
+    </script>
+  </body>
+</html>

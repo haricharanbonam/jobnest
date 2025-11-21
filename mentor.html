@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Mentorship Platform</title>
+    <style>
+      .mentor {
+        color: red;
+        position: relative;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .mentor::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 2px;
+        background-color: red;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f5f5;
+      }
+      .mentor-container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+      .mentor-card {
+        background-color: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+      .mentor-card h3 {
+        margin-top: 0;
+        color: #333;
+      }
+      .mentor-card p {
+        color: #666;
+        line-height: 1.5;
+      }
+      .mentor-card ul {
+        padding-left: 20px;
+      }
+      .action-buttons {
+        display: flex;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .btn {
+        padding: 8px 16px;
+        border-radius: 4px;
+        text-decoration: none;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      .btn-profile {
+        background-color: #f0f0f0;
+        color: #333;
+        border: 1px solid #ddd;
+      }
+      .btn-book {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+      }
+      .modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 1000;
+        justify-content: center;
+        align-items: center;
+      }
+      .modal-content {
+        background-color: white;
+        padding: 30px;
+        border-radius: 8px;
+        width: 80%;
+        max-width: 500px;
+      }
+      .modal h2 {
+        margin-top: 0;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+      .form-group select,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .form-group textarea {
+        min-height: 100px;
+      }
+      .checkbox-group {
+        display: flex;
+        align-items: center;
+        margin-bottom: 20px;
+      }
+      .checkbox-group input {
+        margin-right: 10px;
+      }
+      .modal-buttons {
+        display: flex;
+        justify-content: flex-end;
+        gap: 10px;
+      }
+      .btn-cancel {
+        background-color: #f0f0f0;
+        color: #333;
+        border: 1px solid #ddd;
+      }
+      .btn-submit {
+        background-color: #4caf50;
+        color: white;
+        border: none;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      /* Hero Section */
+      .mentor-hero {
+        background: linear-gradient(
+          135deg,
+          var(--primary-color),
+          var(--secondary-color)
+        );
+        color: white;
+        padding: 60px 20px;
+        text-align: center;
+        border-radius: 10px;
+        margin-bottom: 40px;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .mentor-hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: url("https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80")
+          center/cover;
+        opacity: 0.2;
+        z-index: 0;
+      }
+
+      .mentor-hero-content {
+        position: relative;
+        z-index: 1;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      .mentor-hero h1 {
+        font-size: 2.5rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+      }
+
+      .mentor-hero p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .quote {
+        font-style: italic;
+        font-size: 1.1rem;
+        margin: 30px 0;
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-left: 4px solid var(--accent-color);
+        border-radius: 0 5px 5px 0;
+      }
+      .btn-mentor {
+        display: inline-block;
+        background-color: var(--accent-color);
+        color: white;
+        padding: 12px 30px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border: none;
+        cursor: pointer;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      }
+
+      .btn-mentor:hover {
+        background-color: #3da8d8;
+        transform: translateY(-3px);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Mentor Form Section */
+      .mentor-form-container {
+        display: none;
+        background-color: white;
+        border-radius: 10px;
+        padding: 40px;
+        margin-top: 40px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .mentor-form h2 {
+        color: var(--secondary-color);
+        margin-top: 0;
+        margin-bottom: 30px;
+        font-size: 1.8rem;
+        border-bottom: 2px solid #eee;
+        padding-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    
+    <div id="header-container"></div>
+
+    <section class="mentor-hero">
+      <div class="mentor-hero-content">
+        <h1>Become a Mentor</h1>
+        <p>
+          Share your knowledge, guide the next generation, and grow as a
+          professional by becoming a mentor in our community.
+        </p>
+
+        <div class="quote">
+          "A mentor is someone who allows you to see the hope inside
+          yourself."<br />
+          — Oprah Winfrey
+        </div>
+
+        <button
+          id="showFormBtn"
+          class="btn-mentor"
+          onclick="window.location.href='becomementor.html'"
+        >
+          Become a Mentor Today
+        </button>
+      </div>
+    </section>
+    <div class="mentor-container">
+      <h1>Welcome Candidate</h1>
+      <h2>Top Mentors for you Based on the interests</h2>
+      <hr />
+
+      <!-- Mentor Cards -->
+      <div class="mentor-card">
+        <h3>Robert Downey</h3>
+        <p>Team Member at ITFK Motorsports</p>
+        <p>My topics of expertise for mentorship are:</p>
+        <ul>
+          <li>Academic related quality</li>
+          <li>Academic related projects</li>
+          <li>
+            Guidance to develop essential skills who required to my field of
+            study
+          </li>
+          <li>Guidance for higher studies choices</li>
+          <li>Internship support/guidance</li>
+          <li>
+            Technology support guidance (programming languages – software)
+          </li>
+        </ul>
+        <div class="action-buttons">
+          <a href="#" class="btn btn-profile">View Profile</a>
+          <a href="#" class="btn btn-book" onclick="openModal('Pushkar Yadav')"
+            >Book Session</a
+          >
+        </div>
+      </div>
+
+      <div class="mentor-card">
+        <h3>Hari Charan</h3>
+        <p>My topics of expertise for mentorship are:</p>
+        <ul>
+          <li>Academic related doubts</li>
+          <li>Guidance for higher studies choices</li>
+        </ul>
+        <div class="action-buttons">
+          <a href="#" class="btn btn-profile">View Profile</a>
+          <a href="#" class="btn btn-book" onclick="openModal('Hari Charan')"
+            >Book Session</a
+          >
+        </div>
+      </div>
+
+      <!-- <div class="mentor-card">
+        <h3>Saeed by Kayneer</h3>
+        <div class="action-buttons">
+          <a href="#" class="btn btn-profile">Search by Kayneer</a>
+        </div>
+      </div> -->
+
+      <div class="mentor-card">
+        <h3>Steve Rogers</h3>
+        <p>My topics of expertise for mentorship are:</p>
+        <ul>
+          <li>
+            Guidance to develop technical skills with regards to my field of
+            study
+          </li>
+          <li>Academic related projects</li>
+          <li>Academic related doubts</li>
+        </ul>
+        <div class="action-buttons">
+          <a href="#" class="btn btn-profile">View Profile</a>
+          <a href="#" class="btn btn-book" onclick="openModal('Steve Rogers')"
+            >Book Session</a
+          >
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal for Booking Session -->
+    <div class="modal" id="bookingModal">
+      <div class="modal-content">
+        <h2>Send mentorship request</h2>
+        <p>
+          Once your request is accepted, you will receive a message from them.
+        </p>
+
+        <form id="mentorshipForm">
+          <div class="form-group">
+            <label for="sessionGoal">My goal for this session is *</label>
+            <select id="sessionGoal" required>
+              <option value="">Select your option</option>
+              <option value="Academic Guidance">Academic Guidance</option>
+              <option value="Career Advice">Career Advice</option>
+              <option value="Project Help">Project Help</option>
+              <option value="Skill Development">Skill Development</option>
+              <option value="Higher Studies">Higher Studies</option>
+              <option value="Internship Support">Internship Support</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="personalMessage">Add a personalised message</label>
+            <textarea
+              id="personalMessage"
+              placeholder="Mentioning the agenda clearly will increase your chances of getting accepted."
+            ></textarea>
+          </div>
+
+          <div class="checkbox-group">
+            <input type="checkbox" id="agreeTerms" required />
+            <label for="agreeTerms">I agree to the terms and conditions</label>
+          </div>
+
+          <div class="modal-buttons">
+            <button type="button" class="btn btn-cancel" onclick="closeModal()">
+              CANCEL
+            </button>
+            <button type="submit" class="btn btn-submit">SUBMIT</button>
+          </div>
+        </form>
+      </div>
+    </div>
+    <div id="footer-container"></div>
+
+    <script>
+      function loadHTML(elementId, filePath, callback) {
+        fetch(filePath)
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById(elementId).innerHTML = data;
+            if (callback) callback(); // important
+          })
+          .catch((error) => console.error("Error loading the file:", error));
+      }
+
+      function updateNavbar() {
+        const navRight = document.getElementById("navRight");
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+        let user = null;
+        try {
+          user = JSON.parse(localStorage.getItem("userData"));
+          console.log(user);
+        } catch {}
+
+        if (isLoggedIn && user) {
+          navRight.innerHTML = `
+        <i class="fas fa-user-circle profile-icon" onclick="window.location.href='profile.html'" title="${user.name}"></i>
+      `;
+        } else {
+          navRight.innerHTML = `
+        <button class="btn login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      `;
+        }
+      }
+
+      // Use callback properly now
+      loadHTML("header-container", "nav.html", updateNavbar);
+      loadHTML("faq-container", "faq.html");
+      loadHTML("footer-container", "footer.html");
+      // Function to open modal
+      function openModal(mentorName) {
+        document.getElementById("bookingModal").style.display = "flex";
+        document.querySelector(
+          ".modal-content h2"
+        ).textContent = `Send mentorship request to ${mentorName}`;
+      }
+
+      // Function to close modal
+      function closeModal() {
+        document.getElementById("bookingModal").style.display = "none";
+      }
+
+      // Form submission handler
+      document
+        .getElementById("mentorshipForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+          alert("Your mentorship request has been submitted successfully!");
+          closeModal();
+          // Here you would typically send the form data to your server
+        });
+
+      // Close modal when clicking outside of it
+      window.addEventListener("click", function (e) {
+        if (e.target === document.getElementById("bookingModal")) {
+          closeModal();
+        }
+      });
+    </script>
+  </body>
+</html>

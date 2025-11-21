@@ -1,0 +1,139 @@
+.hero {
+  padding: 80px 20px;
+  text-align: center;
+  background: linear-gradient(to right, #4facfe, #00f2fe);
+  color: white;
+}
+
+.hero-title {
+  font-size: 36px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.hero-subtitle {
+  font-size: 18px;
+  margin-bottom: 30px;
+}
+
+.hero-search {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.category-selector {
+  position: relative;
+  background: white;
+  border-radius: 10px;
+  width: 250px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.selected-category {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  font-weight: bold;
+  color: #333;
+}
+
+.selected-category i:first-child {
+  margin-right: 10px;
+}
+
+.category-dropdown {
+  display: none;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  width: 100%;
+  border-top: 1px solid #ddd;
+  max-height: 250px;
+  overflow-y: auto;
+  z-index: 10;
+}
+
+.category-selector.active .category-dropdown {
+  display: block;
+}
+
+.category-option {
+  display: flex;
+  align-items: flex-start;
+  padding: 10px 16px;
+  border-bottom: 1px solid #f1f1f1;
+  transition: background 0.2s ease;
+}
+
+.category-option:hover {
+  background: #f0f0f0;
+}
+
+.category-option i {
+  font-size: 20px;
+  margin-right: 12px;
+  margin-top: 4px;
+  color: #4facfe;
+}
+
+.category-option h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.category-option p {
+  margin: 2px 0 0;
+  font-size: 13px;
+  color: #666;
+}
+
+.location-selector {
+  position: relative;
+  width: 250px;
+}
+
+.location-dropdown {
+  width: 100%;
+  padding: 12px 40px 12px 16px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  background: white;
+  appearance: none;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.location-selector i {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #4facfe;
+}
+
+.search-btn {
+  background: #333;
+  color: white;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: background 0.3s ease;
+}
+
+.search-btn i {
+  margin-right: 8px;
+}
+
+.search-btn:hover {
+  background: #555;
+}

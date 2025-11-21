@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Job Listings</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+
+      body {
+        background-color: #f5f7fa;
+        color: #333;
+        line-height: 1.6;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .header h1 {
+        font-size: 2.5rem;
+        color: #2c3e50;
+        margin-bottom: 10px;
+      }
+
+      .header p {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+      }
+
+      .job-cards {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+        gap: 25px;
+        margin-top: 30px;
+      }
+
+      .job-card {
+        background: white;
+        border-radius: 10px;
+        padding: 25px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-left: 4px solid #3498db;
+      }
+
+      .job-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+      }
+
+      .job-title {
+        font-size: 1.3rem;
+        color: #2c3e50;
+        margin-bottom: 5px;
+        font-weight: 600;
+      }
+
+      .company-name {
+        color: #3498db;
+        font-weight: 500;
+        margin-bottom: 15px;
+        display: block;
+      }
+
+      .job-details {
+        margin: 15px 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+      }
+
+      .job-detail {
+        display: flex;
+        align-items: center;
+        color: #7f8c8d;
+        font-size: 0.9rem;
+      }
+
+      .job-detail i {
+        margin-right: 5px;
+        color: #3498db;
+      }
+
+      .job-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin: 15px 0;
+      }
+
+      .tag {
+        background: #e8f4fc;
+        color: #3498db;
+        padding: 5px 10px;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+      }
+
+      .job-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 20px;
+        padding-top: 15px;
+        border-top: 1px solid #eee;
+      }
+
+      .time-posted {
+        color: #95a5a6;
+        font-size: 0.85rem;
+      }
+
+      .badge {
+        background: #e8f8f0;
+        color: #27ae60;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 0.75rem;
+        font-weight: 600;
+      }
+
+      .apply-btn {
+        background: #3498db;
+        color: white;
+        border: none;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: background 0.3s ease;
+      }
+
+      .apply-btn:hover {
+        background: #2980b9;
+      }
+
+      .quick-apply {
+        background: transparent;
+        color: #3498db;
+        border: 1px solid #3498db;
+        padding: 8px 15px;
+        border-radius: 5px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-left: 10px;
+      }
+
+      .quick-apply:hover {
+        background: #f0f7fd;
+      }
+
+      @media (max-width: 768px) {
+        .job-cards {
+          grid-template-columns: 1fr;
+        }
+
+        .job-footer {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div class="header">
+        <h1>Job Listings</h1>
+        <p>Browse through our latest job opportunities</p>
+      </div>
+
+      <div class="job-cards">
+        <!-- Job Card 1 -->
+        <div class="job-card">
+          <h2 class="job-title">
+            Software Engineer Sr Staff - Automation Testing, Python / L3
+            Protocols
+          </h2>
+          <span class="company-name">Juniper Networks</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Permanent Job</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Bengaluru</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 7-11 years</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-lock"></i> Confidential</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">PYTHON</span>
+            <span class="tag">UNIX</span>
+            <span class="tag">NAT</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">15 hours ago</span>
+              <span class="badge">Early Applicant</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 2 -->
+        <div class="job-card">
+          <h2 class="job-title">Senior Frontend Developer - React.js</h2>
+          <span class="company-name">Amazon</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Full-time</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Hyderabad</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 5-8 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">REACT</span>
+            <span class="tag">JAVASCRIPT</span>
+            <span class="tag">HTML/CSS</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">1 day ago</span>
+              <span class="badge">Early Applicant</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 3 -->
+        <div class="job-card">
+          <h2 class="job-title">DevOps Engineer - AWS, Kubernetes</h2>
+          <span class="company-name">Microsoft</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Contract</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Pune</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 4-6 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">AWS</span>
+            <span class="tag">KUBERNETES</span>
+            <span class="tag">DOCKER</span>
+            <span class="tag">CI/CD</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">2 days ago</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 4 -->
+        <div class="job-card">
+          <h2 class="job-title">Data Scientist - Machine Learning</h2>
+          <span class="company-name">Google</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Full-time</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Bangalore</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 3-5 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">PYTHON</span>
+            <span class="tag">MACHINE LEARNING</span>
+            <span class="tag">TENSORFLOW</span>
+            <span class="tag">PANDAS</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">3 days ago</span>
+              <span class="badge">Urgent Hiring</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 5 -->
+        <div class="job-card">
+          <h2 class="job-title">Backend Developer - Node.js</h2>
+          <span class="company-name">Flipkart</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Full-time</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Mumbai</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 2-4 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">NODE.JS</span>
+            <span class="tag">EXPRESS</span>
+            <span class="tag">MONGODB</span>
+            <span class="tag">REST API</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">1 week ago</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 6 -->
+        <div class="job-card">
+          <h2 class="job-title">UX/UI Designer</h2>
+          <span class="company-name">Adobe</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Full-time</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Noida</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 3-6 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">FIGMA</span>
+            <span class="tag">SKETCH</span>
+            <span class="tag">UI/UX</span>
+            <span class="tag">PROTOTYPING</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">4 days ago</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 7 -->
+        <div class="job-card">
+          <h2 class="job-title">Cloud Architect - Azure</h2>
+          <span class="company-name">IBM</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Permanent Job</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Chennai</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 8-12 years</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-lock"></i> Confidential</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">AZURE</span>
+            <span class="tag">CLOUD</span>
+            <span class="tag">DEVOPS</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">5 days ago</span>
+              <span class="badge">Early Applicant</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 8 -->
+        <div class="job-card">
+          <h2 class="job-title">Mobile Developer - Flutter</h2>
+          <span class="company-name">Uber</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Full-time</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Remote</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 3-5 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">FLUTTER</span>
+            <span class="tag">DART</span>
+            <span class="tag">MOBILE</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">6 hours ago</span>
+              <span class="badge">Urgent Hiring</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 9 -->
+        <div class="job-card">
+          <h2 class="job-title">Cybersecurity Analyst</h2>
+          <span class="company-name">Cisco</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Full-time</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Gurgaon</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 4-7 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">CYBERSECURITY</span>
+            <span class="tag">SIEM</span>
+            <span class="tag">NETWORK SECURITY</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">1 day ago</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 10 -->
+        <div class="job-card">
+          <h2 class="job-title">Product Manager</h2>
+          <span class="company-name">PayPal</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Full-time</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Bangalore</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 6-9 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">PRODUCT MANAGEMENT</span>
+            <span class="tag">AGILE</span>
+            <span class="tag">STRATEGY</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">2 days ago</span>
+              <span class="badge">Early Applicant</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 11 -->
+        <div class="job-card">
+          <h2 class="job-title">Full Stack Developer - MERN</h2>
+          <span class="company-name">Netflix</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Contract</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Remote</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 3-5 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">MERN</span>
+            <span class="tag">REACT</span>
+            <span class="tag">NODE.JS</span>
+            <span class="tag">MONGODB</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">3 days ago</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 12 -->
+        <div class="job-card">
+          <h2 class="job-title">AI/ML Engineer</h2>
+          <span class="company-name">NVIDIA</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Full-time</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Pune</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 4-7 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">AI/ML</span>
+            <span class="tag">PYTHON</span>
+            <span class="tag">TENSORFLOW</span>
+            <span class="tag">PYTORCH</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">1 week ago</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 13 -->
+        <div class="job-card">
+          <h2 class="job-title">Database Administrator</h2>
+          <span class="company-name">Oracle</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Full-time</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Hyderabad</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 5-8 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">SQL</span>
+            <span class="tag">ORACLE</span>
+            <span class="tag">DATABASE</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">4 days ago</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 14 -->
+        <div class="job-card">
+          <h2 class="job-title">Technical Writer</h2>
+          <span class="company-name">Red Hat</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Full-time</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Bangalore</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 2-4 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">TECHNICAL WRITING</span>
+            <span class="tag">DOCUMENTATION</span>
+            <span class="tag">GIT</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">5 days ago</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Job Card 15 -->
+        <div class="job-card">
+          <h2 class="job-title">QA Automation Engineer</h2>
+          <span class="company-name">VMware</span>
+
+          <div class="job-details">
+            <span class="job-detail"
+              ><i class="fas fa-briefcase"></i> Full-time</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-map-marker-alt"></i> Pune</span
+            >
+            <span class="job-detail"
+              ><i class="fas fa-clock"></i> 3-6 years</span
+            >
+          </div>
+
+          <div class="job-tags">
+            <span class="tag">SELENIUM</span>
+            <span class="tag">JAVA</span>
+            <span class="tag">TESTING</span>
+          </div>
+
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">2 days ago</span>
+              <span class="badge">Early Applicant</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

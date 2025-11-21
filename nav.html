@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>JobNest</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: Arial, sans-serif;
+      }
+
+      .navbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        background-color: white;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        height: 110px;
+      }
+
+      .nav-logo {
+        font-size: 30px;
+        font-weight: bold;
+        color: #333;
+        flex: 1;
+      }
+
+      .nav-center {
+        display: flex;
+        gap: 60px;
+        flex: 1;
+        justify-content: center;
+      }
+
+      .nav-center a {
+        text-decoration: none;
+        color: #333;
+        font-size: 19px;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-center a:hover {
+        color: #0057ff;
+      }
+
+      .nav-right {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+      }
+
+      .btn {
+        padding: 10px 22px;
+        text-decoration: none;
+        border-radius: 6px;
+        font-size: 16px;
+        border: 1px solid transparent;
+        transition: 0.3s ease;
+        cursor: pointer;
+      }
+
+      .login {
+        border: 1.5px solid #0057ff;
+        color: #0057ff;
+        background-color: white;
+      }
+
+      .login:hover {
+        background-color: #0057ff;
+        color: white;
+      }
+
+      .signup {
+        background-color: #0057ff;
+        color: white;
+      }
+
+      .signup:hover {
+        background-color: #003fcc;
+      }
+
+      .profile-icon {
+        font-size: 50px;
+        color: #0057ff;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="navbar">
+      <div class="nav-left">
+        <div class="nav-logo">JobNest</div>
+      </div>
+
+      <div class="nav-center">
+        <a href="index.html" class="home">Home</a>
+        <a href="jobs.html" class="jobs">Jobs</a>
+        <a href="aboutus.html" class="aboutus">About us</a>
+        <a href="upskill.html" class="upskill">Upskill</a>
+        <a href="mentor.html" class="mentor">Mentorship</a>
+        <a href="community.html" class="community">Community</a>
+        <a href="contact.html" class="contact">Contact us</a>
+      </div>
+
+      <div class="nav-right" id="navRight"></div>
+    </header>
+
+    <script>
+      const navRight = document.getElementById("navRight");
+      const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+      const user = JSON.parse(localStorage.getItem("userData"));
+
+      if (isLoggedIn && user) {
+        navRight.innerHTML = `
+        <i class="fas fa-user-circle profile-icon" onclick="window.location.href='profile.html'" title="${user.name}"></i>
+      `;
+      } else {
+        navRight.innerHTML = `
+        <button class="btn login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      `;
+      }
+    </script>
+  </body>
+</html>

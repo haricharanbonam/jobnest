@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .upskill {
+        color: red;
+        position: relative;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .upskill::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 2px;
+        background-color: red;
+      }
+      .skill-assessments {
+        max-width: 1200px;
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        position: relative;
+        cursor: pointer;
+      }
+
+      .skill-assessments h2 {
+        font-size: 24px;
+        color: #333;
+        margin-bottom: 20px;
+        font-weight: bold;
+      }
+
+      .assessment-container {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+      }
+
+      .assessment-card {
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        text-align: center;
+      }
+
+      .assessment-card img {
+        width: 100%;
+        max-width: 200px;
+        height: auto;
+        margin-bottom: 10px;
+      }
+
+      .assessment-card h3 {
+        font-size: 18px;
+        color: #333;
+        margin: 0;
+      }
+
+      .assessment-card p {
+        font-size: 14px;
+        color: #777;
+        margin-top: 5px;
+      }
+
+      .more-link {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 16px;
+        color: #007bff;
+        text-decoration: none;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="header-container"></div>
+    <div class="skill-assessments">
+      <h2>skill Assessments</h2>
+      <div class="assessment-container">
+        <div
+          class="assessment-card"
+          onclick="window.location.href='testdetails.html'"
+        >
+          <img
+            src="https://media.foundit.in/public/career-services-ui/assets/illustration/software-developer-tests.svg"
+            alt="Software Developer Tests"
+          />
+          <h3>Software Developer Tests</h3>
+          <p>10000+ tests taken</p>
+        </div>
+        <div
+          class="assessment-card"
+          onclick="window.location.href='testdetails.html'"
+        >
+          <img
+            src="https://media.foundit.in/public/career-services-ui/assets/illustration/software-testing-tests.svg"
+            alt="Software Testing Tests"
+          />
+          <h3>Software Testing Tests</h3>
+          <p>1200+ tests taken</p>
+        </div>
+        <div
+          class="assessment-card"
+          onclick="window.location.href='testdetails.html'"
+        >
+          <img
+            src="https://media.foundit.in/public/career-services-ui/assets/illustration/non-engineering-tests.svg"
+            alt="Non-Engineering Tests"
+          />
+          <h3>Non-Engineering Tests</h3>
+          <p>7000+ tests taken</p>
+        </div>
+      </div>
+      <a href="#" class="more-link">More →</a>
+    </div>
+    <div id="footer-container"></div>
+    <script>
+      function loadHTML(elementId, filePath, callback) {
+        fetch(filePath)
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById(elementId).innerHTML = data;
+            if (callback) callback(); // important
+          })
+          .catch((error) => console.error("Error loading the file:", error));
+      }
+
+      function updateNavbar() {
+        const navRight = document.getElementById("navRight");
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+        let user = null;
+        try {
+          user = JSON.parse(localStorage.getItem("userData"));
+          console.log(user);
+        } catch {}
+
+        if (isLoggedIn && user) {
+          navRight.innerHTML = `
+        <i class="fas fa-user-circle profile-icon" onclick="window.location.href='profile.html'" title="${user.name}"></i>
+      `;
+        } else {
+          navRight.innerHTML = `
+        <button class="btn login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      `;
+        }
+      }
+
+      loadHTML("header-container", "nav.html", updateNavbar);
+      loadHTML("footer-container", "footer.html");
+    </script>
+  </body>
+</html>

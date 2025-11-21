@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carbon Footprint Calculator</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f7fa;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .calculator-container {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            font-size: 24px;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            font-size: 18px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .input-section {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        select, input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            margin-bottom: 10px;
+        }
+        
+        button {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-weight: 600;
+            margin-top: 20px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #2ecc71;
+        }
+        
+        .results {
+            margin-top: 30px;
+            display: none;
+        }
+        
+        .total-emissions {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        
+        .total-emissions h3 {
+            font-size: 20px;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        .total-emissions .value {
+            font-size: 36px;
+            font-weight: 700;
+            color: #27ae60;
+        }
+        
+        .total-emissions .subtext {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .category-breakdown {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 30px;
+        }
+        
+        .category {
+            text-align: center;
+            flex: 1;
+            padding: 15px;
+        }
+        
+        .category .value {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+        }
+        
+        .category .label {
+            color: #7f8c8d;
+            font-size: 14px;
+        }
+        
+        .chart-container {
+            margin-top: 30px;
+            height: 300px;
+        }
+        
+        .bar-chart {
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+        
+        .bar {
+            width: 30%;
+            background-color: #27ae60;
+            border-radius: 4px 4px 0 0;
+            position: relative;
+        }
+        
+        .bar-label {
+            position: absolute;
+            bottom: -25px;
+            width: 100%;
+            text-align: center;
+            font-size: 12px;
+            color: #7f8c8d;
+        }
+        
+        .bar-value {
+            position: absolute;
+            top: -25px;
+            width: 100%;
+            text-align: center;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator-container">
+        <h1>Your Lifestyle Inputs</h1>
+        
+        <div class="input-section">
+            <h2>Electricity Usage</h2>
+            <label for="unit-type">Unit Type</label>
+            <select id="unit-type">
+                <option value="rupees">Rupees</option>
+                <option value="kwh">kWh</option>
+            </select>
+            
+            <label for="electricity-bill">Monthly Electricity Bill</label>
+            <input type="number" id="electricity-bill" placeholder="Enter amount" min="0" required>
+        </div>
+        
+        <div class="input-section">
+            <h2>Transportation</h2>
+            <label for="driving-distance">Weekly Driving Distance (km)</label>
+            <input type="number" id="driving-distance" placeholder="Enter km" min="0" required>
+        </div>
+        
+        <div class="input-section">
+            <h2>Dietary Habits</h2>
+            <label for="diet-type">Diet Type</label>
+            <select id="diet-type">
+                <option value="mixed">Mixed Diet</option>
+                <option value="vegetarian">Vegetarian</option>
+                <option value="vegan">Vegan</option>
+                <option value="meat-heavy">Meat Heavy</option>
+            </select>
+        </div>
+        
+        <button id="calculate-btn">Calculate My Carbon Footprint</button>
+        
+        <div class="results" id="results" style="display:none;">
+            <div class="total-emissions">
+                <div class="value" id="total-emissions">0 kg</div>
+                <h3>Annual CO₂ Emissions</h3>
+                <div class="subtext">(△ Equivalent to 0 trees needed annually)</div>
+            </div>
+            
+            <div class="category-breakdown">
+                <div class="category">
+                    <div class="value" id="electricity-emissions">0 kg</div>
+                    <div class="label">Electricity</div>
+                </div>
+                <div class="category">
+                    <div class="value" id="transport-emissions">0 kg</div>
+                    <div class="label">Transport</div>
+                </div>
+                <div class="category">
+                    <div class="value" id="food-emissions">0 kg</div>
+                    <div class="label">Food</div>
+                </div>
+            </div>
+            
+            <h2>Emissions Breakdown</h2>
+            <div class="chart-container">
+                <canvas id="pieChart"></canvas>
+            </div>
+            
+            <h2>Annual CO₂ Emissions by Category</h2>
+            <div class="bar-chart">
+                <div class="bar" style="height: 0%;">
+                    <div class="bar-value">0 kg</div>
+                    <div class="bar-label">Electricity</div>
+                </div>
+                <div class="bar" style="height: 0%;">
+                    <div class="bar-value">0 kg</div>
+                    <div class="bar-label">Transport</div>
+                </div>
+                <div class="bar" style="height: 0%;">
+                    <div class="bar-value">0 kg</div>
+                    <div class="bar-label">Food</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('calculate-btn').addEventListener('click', function() {
+            // Get input values
+            const unitType = document.getElementById('unit-type').value;
+            let electricityBill = parseFloat(document.getElementById('electricity-bill').value);
+            const drivingDistance = parseFloat(document.getElementById('driving-distance').value);
+            const dietType = document.getElementById('diet-type').value;
+
+            // Input validation
+            if (isNaN(electricityBill) || electricityBill < 0) electricityBill = 0;
+            if (isNaN(drivingDistance) || drivingDistance < 0) drivingDistance = 0;
+
+            // Convert rupees to kWh if needed (assume ₹8 per kWh)
+            let electricityKWh;
+            if (unitType === 'rupees') {
+                electricityKWh = electricityBill / 8;
+            } else {
+                electricityKWh = electricityBill;
+            }
+
+            // Calculate annual electricity emissions (0.82 kg CO2 per kWh, India avg)
+            const electricityEmissions = Math.round(electricityKWh * 0.82 * 12);
+
+            // Calculate annual transport emissions (0.2 kg CO2 per km, 52 weeks)
+            const transportEmissions = Math.round(drivingDistance * 52 * 0.2);
+
+            // Calculate annual food emissions
+            let foodEmissions;
+            switch(dietType) {
+                case 'vegan':
+                    foodEmissions = 400;
+                    break;
+                case 'vegetarian':
+                    foodEmissions = 600;
+                    break;
+                case 'mixed':
+                    foodEmissions = 800;
+                    break;
+                case 'meat-heavy':
+                    foodEmissions = 1200;
+                    break;
+                default:
+                    foodEmissions = 800;
+            }
+
+            const totalEmissions = electricityEmissions + transportEmissions + foodEmissions;
+            const treesNeeded = Math.round(totalEmissions / 22);
+
+            // Update UI
+            document.getElementById('total-emissions').textContent = totalEmissions.toLocaleString() + ' kg';
+            document.getElementById('electricity-emissions').textContent = electricityEmissions.toLocaleString() + ' kg';
+            document.getElementById('transport-emissions').textContent = transportEmissions.toLocaleString() + ' kg';
+            document.getElementById('food-emissions').textContent = foodEmissions.toLocaleString() + ' kg';
+            document.querySelector('.subtext').textContent = `(△ Equivalent to ${treesNeeded} trees needed annually)`;
+
+            // Update bar chart values
+            document.querySelectorAll('.bar-value')[0].textContent = electricityEmissions.toLocaleString() + ' kg';
+            document.querySelectorAll('.bar-value')[1].textContent = transportEmissions.toLocaleString() + ' kg';
+            document.querySelectorAll('.bar-value')[2].textContent = foodEmissions.toLocaleString() + ' kg';
+
+            // Update bar heights (percentage of highest value)
+            const maxValue = Math.max(electricityEmissions, transportEmissions, foodEmissions, 1);
+            document.querySelectorAll('.bar')[0].style.height = `${(electricityEmissions / maxValue) * 100}%`;
+            document.querySelectorAll('.bar')[1].style.height = `${(transportEmissions / maxValue) * 100}%`;
+            document.querySelectorAll('.bar')[2].style.height = `${(foodEmissions / maxValue) * 100}%`;
+
+            // Create pie chart
+            createPieChart(electricityEmissions, transportEmissions, foodEmissions);
+
+            // Show results
+            document.getElementById('results').style.display = 'block';
+        });
+
+        function createPieChart(electricity, transport, food) {
+            const ctx = document.getElementById('pieChart').getContext('2d');
+            if (window.pieChart) {
+                window.pieChart.destroy();
+            }
+            const total = electricity + transport + food;
+            window.pieChart = new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: ['Electricity', 'Transport', 'Food'],
+                    datasets: [{
+                        data: [electricity, transport, food],
+                        backgroundColor: [
+                            '#3498db',
+                            '#e74c3c',
+                            '#2ecc71'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            position: 'right',
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    const value = context.raw;
+                                    const percent = total ? Math.round((value / total) * 100) : 0;
+                                    return `${context.label}: ${value} kg (${percent}%)`;
+                                }
+                            }
+                        }
+                    }
+                }
+            });

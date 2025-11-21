@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile - JobNest</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+    <style>
+      /* Basic styling for profile page */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: white;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .profile-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 20px;
+        border-bottom: 2px solid #f0f0f0;
+      }
+
+      .profile-header h1 {
+        margin: 0;
+        font-size: 24px;
+      }
+
+      .profile-info {
+        margin-top: 20px;
+      }
+
+      .profile-info p {
+        margin: 5px 0;
+        font-size: 18px;
+      }
+
+      .applied-jobs {
+        margin-top: 30px;
+      }
+
+      .applied-jobs h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+      }
+
+      .job-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #fff;
+      }
+
+      .job-card-header {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 10px;
+      }
+
+      .job-id {
+        color: #666;
+        font-size: 14px;
+      }
+
+      .job-title {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+
+      .job-status {
+        display: inline-block;
+        padding: 5px 10px;
+        border-radius: 4px;
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .status-selected {
+        background-color: #d4edda;
+        color: #155724;
+      }
+
+      .status-document {
+        background-color: #fff3cd;
+        color: #856404;
+      }
+
+      .status-closed {
+        background-color: #f8d7da;
+        color: #721c24;
+      }
+
+      .status-pending {
+        background-color: #cce5ff;
+        color: #004085;
+      }
+
+      .logout-btn {
+        background-color: #f44336;
+        color: white;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+
+      .logout-btn:hover {
+        background-color: #d32f2f;
+      }
+
+      .upcoming-sessions {
+        margin-top: 40px;
+      }
+
+      .upcoming-sessions h2 {
+        font-size: 22px;
+        margin-bottom: 20px;
+        color: #333;
+        border-bottom: 2px solid #f0f0f0;
+        padding-bottom: 10px;
+      }
+
+      .session-card {
+        border: 1px solid #e0e0e0;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        background-color: #fff;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .session-image {
+        width: 60px;
+        height: 60px;
+        background-color: #f0f0f0;
+        border-radius: 8px;
+        /* Placeholder for image */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: #999;
+      }
+
+      .session-details {
+        flex: 1;
+      }
+
+      .session-name {
+        font-weight: bold;
+        font-size: 16px;
+        margin-bottom: 5px;
+      }
+
+      .session-company {
+        color: #666;
+        font-size: 14px;
+        margin-bottom: 5px;
+      }
+
+      .session-time {
+        color: #888;
+        font-size: 13px;
+        margin-bottom: 5px;
+      }
+
+      .session-status {
+        display: inline-block;
+        padding: 3px 8px;
+        border-radius: 4px;
+        font-size: 12px;
+        font-weight: 500;
+        background-color: #d4edda;
+        color: #155724;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <!-- Profile Header -->
+      <div class="profile-header">
+        <h1>Welcome, <span id="userName"></span></h1>
+        <i
+          class="fas fa-user-circle"
+          style="font-size: 40px; color: #0057ff"
+        ></i>
+      </div>
+
+      <!-- User Info Section -->
+      <div class="profile-info">
+        <p>Email: <span id="userEmail"></span></p>
+        <p>Portfolio: <a id="userPortfolio" href="" target="_blank">Link</a></p>
+      </div>
+
+      <!-- Applied Jobs Status -->
+      <div class="applied-jobs">
+        <h2>Applied Jobs Status</h2>
+
+        <div class="job-card">
+          <div class="job-card-header">
+            <span class="job-id">Application No.: 476931864252075</span>
+          </div>
+          <div class="job-title">Frontend Developer at TechCorp</div>
+          <span class="job-status status-selected">Selected for Interview</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-header">
+            <span class="job-id">Application No.: 47693186425443</span>
+          </div>
+          <div class="job-title">UX Designer at DesignHub</div>
+          <span class="job-status status-document">Document Verification</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-header">
+            <span class="job-id">Application No.: 47693186425746</span>
+          </div>
+          <div class="job-title">Backend Engineer at DataSystems</div>
+          <span class="job-status status-pending">Under Review</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-header">
+            <span class="job-id">Application No.: 476931864254580</span>
+          </div>
+          <div class="job-title">Product Manager at InnovateCo</div>
+          <span class="job-status status-closed">Application Closed</span>
+        </div>
+
+        <div class="job-card">
+          <div class="job-card-header">
+            <span class="job-id">Application No.: 476931864222727</span>
+          </div>
+          <div class="job-title">Data Analyst at AnalyticsPro</div>
+          <span class="job-status status-selected">Next Round Scheduled</span>
+        </div>
+      </div>
+      <!-- New Upcoming Sessions Section -->
+      <div class="upcoming-sessions">
+        <h2>Upcoming Sessions</h2>
+
+        <div class="session-card">
+          <div class="session-image">
+            <i class="fas fa-calendar-alt"></i>
+          </div>
+          <div class="session-details">
+            <div class="session-name">Resume Workshop</div>
+            <div class="session-company">JobNest Career Services</div>
+            <div class="session-time">15 Mar 25, 10:00 AM IST</div>
+            <span class="session-status">Registered</span>
+          </div>
+        </div>
+
+        <div class="session-card">
+          <div class="session-image">
+            <i class="fas fa-users"></i>
+          </div>
+          <div class="session-details">
+            <div class="session-name">Interview Prep: Tech Roles</div>
+            <div class="session-company">JobNest & TechHire Partners</div>
+            <div class="session-time">18 Mar 25, 02:30 PM IST</div>
+            <span class="session-status">Upcoming</span>
+          </div>
+        </div>
+
+        <div class="session-card">
+          <div class="session-image">
+            <i class="fas fa-briefcase"></i>
+          </div>
+          <div class="session-details">
+            <div class="session-name">Networking Mixer</div>
+            <div class="session-company">JobNest Community</div>
+            <div class="session-time">20 Mar 25, 06:00 PM IST</div>
+            <span class="session-status">Confirmed</span>
+          </div>
+        </div>
+
+        <div class="session-card">
+          <div class="session-image">
+            <i class="fas fa-chalkboard-teacher"></i>
+          </div>
+          <div class="session-details">
+            <div class="session-name">Salary Negotiation Masterclass</div>
+            <div class="session-company">JobNest HR Experts</div>
+            <div class="session-time">22 Mar 25, 11:00 AM IST</div>
+            <span class="session-status">Registered</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logout Button -->
+      <button class="logout-btn" onclick="logout()">Logout</button>
+    </div>
+
+    <script>
+      // Load user data from localStorage
+      const user = JSON.parse(localStorage.getItem("userData"));
+
+      if (user) {
+        document.getElementById("userName").textContent = user.name;
+        document.getElementById("userEmail").textContent = user.email;
+        document.getElementById("userPortfolio").href = user.portfolio;
+        document.getElementById("userPortfolio").textContent = user.portfolio;
+      }
+
+      // Logout Function
+      function logout() {
+        localStorage.removeItem("isLoggedIn");
+        localStorage.removeItem("userData");
+        window.location.href = "login.html"; // Redirect to login page after logout
+      }
+    </script>
+  </body>
+</html>

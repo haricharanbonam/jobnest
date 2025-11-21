@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Explore Courses - JobNest</title>
+    <link rel="stylesheet" href="css/courses.css" />
+  </head>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #f3f4f6;
+      margin: 0;
+      padding: 0;
+    }
+
+    .courses-container {
+      max-width: 1100px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    .filters {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+    }
+
+    .filters select {
+      padding: 12px 16px;
+      font-size: 16px;
+      border: 2px solid #6a11cb;
+      border-radius: 8px;
+      background: #fff;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .filters select:hover {
+      background-color: #f0f0ff;
+    }
+
+    .course-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .course-card {
+      background: #ffffff;
+      border: 1px solid #ddd;
+      border-left: 5px solid #6a11cb;
+      padding: 20px;
+      border-radius: 12px;
+      transition: transform 0.2s ease-in-out, box-shadow 0.2s;
+    }
+
+    .course-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.1);
+    }
+
+    .course-card h3 {
+      color: #333;
+      margin-top: 0;
+    }
+
+    .course-card p {
+      color: #555;
+      margin: 5px 0;
+    }
+
+    .course-card a {
+      display: inline-block;
+      margin-top: 10px;
+      text-decoration: none;
+      color: white;
+      background-color: #6a11cb;
+      padding: 10px 14px;
+      border-radius: 6px;
+      transition: background 0;
+    }
+  </style>
+  <body>
+    <div class="courses-container">
+      <h1>Explore Courses to Improve Your Skills</h1>
+
+      <!-- Filters -->
+      <div class="filters">
+        <select id="languageFilter">
+          <option value="">Filter by Language</option>
+          <option value="JavaScript">JavaScript</option>
+          <option value="Python">Python</option>
+          <option value="C++">C++</option>
+        </select>
+
+        <select id="topicFilter">
+          <option value="">Filter by Topic</option>
+          <option value="Loops">Loops</option>
+          <option value="DOM">DOM</option>
+          <option value="Type Coercion">Type Coercion</option>
+          <option value="Variables">Variables</option>
+          <option value="Arrays">Arrays</option>
+        </select>
+      </div>
+
+      <!-- Course Cards -->
+      <div id="course-list" class="course-list">
+        <!-- JavaScript generated -->
+      </div>
+    </div>
+
+    <script>
+      const courses = [
+        {
+          title: "Mastering Loops in JavaScript",
+          language: "JavaScript",
+          topic: "Loops",
+          description: "Learn all types of loops with real-time examples.",
+          link: "#",
+        },
+        {
+          title: "Understanding the DOM",
+          language: "JavaScript",
+          topic: "DOM",
+          description: "Manipulate web pages using DOM like a pro.",
+          link: "#",
+        },
+        {
+          title: "JS Type Coercion Explained",
+          language: "JavaScript",
+          topic: "Type Coercion",
+          description: "Understand implicit vs explicit conversions in JS.",
+          link: "#",
+        },
+        {
+          title: "Variables in JS: var vs let vs const",
+          language: "JavaScript",
+          topic: "Variables",
+          description:
+            "Everything you need to know about variable declarations.",
+          link: "#",
+        },
+        {
+          title: "Array Methods Deep Dive",
+          language: "JavaScript",
+          topic: "Arrays",
+          description: "Explore all built-in array methods with use cases.",
+          link: "#",
+        },
+      ];
+
+      const courseList = document.getElementById("course-list");
+      const languageFilter = document.getElementById("languageFilter");
+      const topicFilter = document.getElementById("topicFilter");
+
+      function renderCourses(data) {
+        courseList.innerHTML = "";
+
+        if (data.length === 0) {
+          courseList.innerHTML = "<p>No courses match your filters.</p>";
+          return;
+        }
+
+        data.forEach((course) => {
+          const card = document.createElement("div");
+          card.className = "course-card";
+          card.innerHTML = `
+          <h3>${course.title}</h3>
+          <p><strong>Language:</strong> ${course.language}</p>
+          <p><strong>Topic:</strong> ${course.topic}</p>
+          <p>${course.description}</p>
+          <a href="${course.link}" target="_blank">View Blog</a>
+        `;
+
+          card.onclick = function () {
+            window.location.href = "loops.html";
+          };
+          courseList.appendChild(card);
+        });
+      }
+
+      function filterCourses() {
+        const lang = languageFilter.value;
+        const topic = topicFilter.value;
+
+        const filtered = courses.filter(
+          (course) =>
+            (!lang || course.language === lang) &&
+            (!topic || course.topic === topic)
+        );
+
+        renderCourses(filtered);
+      }
+
+      languageFilter.onchange = filterCourses;
+      topicFilter.onchange = filterCourses;
+
+      // Show all by default
+      renderCourses(courses);
+    </script>
+  </body>
+</html>

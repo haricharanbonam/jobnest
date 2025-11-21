@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Community Discussions</title>
+    <style>
+      .community {
+        color: red;
+        position: relative;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .community::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 2px;
+        background-color: red;
+      }
+      :root {
+        --primary-color: #4a6fa5;
+        --secondary-color: #166088;
+        --accent-color: #4fc3f7;
+        --light-color: #f8f9fa;
+        --dark-color: #343a40;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0;
+        padding: 20px;
+        background-color: #f5f7fa;
+        color: #333;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+      }
+
+      /* Community Header */
+      .community-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+      }
+
+      .community-header h1 {
+        color: var(--secondary-color);
+        margin: 0;
+      }
+
+      .create-post-btn {
+        background-color: var(--accent-color);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 20px;
+        font-weight: bold;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      .create-post-btn:hover {
+        background-color: #3da8d8;
+      }
+
+      /* Post Type Selector */
+      .post-type-selector {
+        display: none;
+        background: white;
+        border-radius: 8px;
+        padding: 15px;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+      }
+
+      .post-type-btns {
+        display: flex;
+        gap: 10px;
+        margin-bottom: 15px;
+      }
+
+      .post-type-btn {
+        flex: 1;
+        padding: 10px;
+        text-align: center;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        cursor: pointer;
+        background: white;
+      }
+
+      .post-type-btn.active {
+        border-color: var(--accent-color);
+        background-color: rgba(79, 195, 247, 0.1);
+      }
+
+      /* Discussion Form */
+      .discussion-form {
+        display: none;
+      }
+
+      .discussion-form textarea {
+        width: 100%;
+        padding: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        min-height: 100px;
+        margin-bottom: 10px;
+        resize: vertical;
+      }
+
+      .discussion-form button {
+        background-color: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+
+      /* Poll Form */
+      .poll-form {
+        display: none;
+      }
+
+      .poll-form input[type="text"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .poll-option {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+      }
+
+      .poll-option input {
+        flex-grow: 1;
+        padding: 8px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+      }
+
+      .add-option {
+        color: var(--accent-color);
+        cursor: pointer;
+        margin-bottom: 15px;
+        display: inline-block;
+      }
+
+      /* Existing Posts */
+      .post {
+        background: white;
+        border-radius: 8px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+      }
+
+      .post-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 15px;
+      }
+
+      .post-user {
+        font-weight: bold;
+        margin-right: 10px;
+      }
+
+      .post-time {
+        color: #666;
+        font-size: 0.9em;
+      }
+
+      .post-content {
+        margin-bottom: 15px;
+      }
+
+      .post-tags {
+        color: var(--accent-color);
+        margin-bottom: 15px;
+      }
+
+      .post-actions {
+        display: flex;
+        gap: 15px;
+        color: #666;
+      }
+
+      .post-action {
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        cursor: pointer;
+      }
+
+      /* Poll Results */
+      .poll-results {
+        margin-top: 15px;
+      }
+
+      .poll-option-result {
+        margin-bottom: 10px;
+      }
+
+      .poll-option-text {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 5px;
+      }
+
+      .poll-bar {
+        height: 10px;
+        background-color: #eee;
+        border-radius: 5px;
+        overflow: hidden;
+      }
+
+      .poll-bar-fill {
+        height: 100%;
+        background-color: var(--accent-color);
+      }
+
+      .poll-total {
+        color: #666;
+        font-size: 0.9em;
+        margin-top: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="header-container"></div>
+    <div class="container">
+      <!-- Community Header -->
+      <div class="community-header">
+        <h1>Community Discussions</h1>
+        <button id="createPostBtn" class="create-post-btn">
+          + START A DISCUSSION / POLL
+        </button>
+      </div>
+
+      <!-- Post Type Selector (Hidden by default) -->
+      <div id="postTypeSelector" class="post-type-selector">
+        <div class="post-type-btns">
+          <button id="discussionBtn" class="post-type-btn active">
+            Discussion
+          </button>
+          <button id="pollBtn" class="post-type-btn">Poll</button>
+        </div>
+
+        <!-- Discussion Form -->
+        <div id="discussionForm" class="discussion-form">
+          <textarea placeholder="What would you like to discuss?"></textarea>
+          <button id="postDiscussionBtn">Post Discussion</button>
+        </div>
+
+        <!-- Poll Form -->
+        <div id="pollForm" class="poll-form">
+          <input
+            type="text"
+            placeholder="Ask a question..."
+            id="pollQuestion"
+          />
+          <div id="pollOptions">
+            <div class="poll-option">
+              <input type="text" placeholder="Option 1" />
+            </div>
+            <div class="poll-option">
+              <input type="text" placeholder="Option 2" />
+            </div>
+          </div>
+          <span class="add-option" id="addOptionBtn">+ Add option</span>
+          <button id="createPollBtn">Create Poll</button>
+        </div>
+      </div>
+
+      <!-- Existing Posts (Static Examples) -->
+      <div class="post">
+        <div class="post-header">
+          <span class="post-user">Priyanshu Yadav</span>
+          <span class="post-time">answered a poll · Feb 5, 2025</span>
+        </div>
+        <div class="post-content">
+          <strong>From Campus to Career: Perfecting Interview Skills</strong>
+          <p>Have you secured a summer internship?</p>
+          <p><em>The author or admins can see your voting choice.</em></p>
+        </div>
+        <div class="poll-results">
+          <div class="poll-option-result">
+            <div class="poll-option-text">
+              <span>Yes</span>
+              <span>11%</span>
+            </div>
+            <div class="poll-bar">
+              <div class="poll-bar-fill" style="width: 11%"></div>
+            </div>
+          </div>
+          <div class="poll-option-result">
+            <div class="poll-option-text">
+              <span>Not yet, but trying to</span>
+              <span>80%</span>
+            </div>
+            <div class="poll-bar">
+              <div class="poll-bar-fill" style="width: 80%"></div>
+            </div>
+          </div>
+          <div class="poll-option-result">
+            <div class="poll-option-text">
+              <span>Not planning</span>
+              <span>9%</span>
+            </div>
+            <div class="poll-bar">
+              <div class="poll-bar-fill" style="width: 9%"></div>
+            </div>
+          </div>
+          <div class="poll-total">56 votes</div>
+        </div>
+      </div>
+
+      <div class="post">
+        <div class="post-header">
+          <span class="post-user">Ramya T M</span>
+          <span class="post-time">Feb 3, 2025</span>
+        </div>
+        <div class="post-content">
+          <p>
+            Can anyone suggest life science mainly biotechnology free
+            certificate courses
+          </p>
+          <div class="post-tags">#Certificate_Courses</div>
+        </div>
+        <div class="post-actions">
+          <div class="post-action">
+            <span>Like</span>
+          </div>
+          <div class="post-action">
+            <span>Comment</span>
+          </div>
+        </div>
+        <div class="post-footer">
+          <p>1 people liked the post.</p>
+          <input
+            type="text"
+            placeholder="Press enter to comment"
+            style="
+              width: 100%;
+              padding: 8px;
+              border: 1px solid #ddd;
+              border-radius: 4px;
+            "
+          />
+        </div>
+      </div>
+    </div>
+    <div id="footer-container"></div>
+
+    <script>
+      // Toggle post creation form
+      function loadHTML(elementId, filePath, callback) {
+        fetch(filePath)
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById(elementId).innerHTML = data;
+            if (callback) callback(); // important
+          })
+          .catch((error) => console.error("Error loading the file:", error));
+      }
+
+      function updateNavbar() {
+        const navRight = document.getElementById("navRight");
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+        let user = null;
+        try {
+          user = JSON.parse(localStorage.getItem("userData"));
+          console.log(user);
+        } catch {}
+
+        if (isLoggedIn && user) {
+          navRight.innerHTML = `
+        <i class="fas fa-user-circle profile-icon" onclick="window.location.href='profile.html'" title="${user.name}"></i>
+      `;
+        } else {
+          navRight.innerHTML = `
+        <button class="btn login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      `;
+        }
+      }
+
+      // Use callback properly now
+      loadHTML("header-container", "nav.html", updateNavbar);
+      loadHTML("footer-container", "footer.html");
+
+      document
+        .getElementById("createPostBtn")
+        .addEventListener("click", function () {
+          const selector = document.getElementById("postTypeSelector");
+          selector.style.display =
+            selector.style.display === "none" ? "block" : "none";
+        });
+
+      // Switch between discussion and poll forms
+      document
+        .getElementById("discussionBtn")
+        .addEventListener("click", function () {
+          this.classList.add("active");
+          document.getElementById("pollBtn").classList.remove("active");
+          document.getElementById("discussionForm").style.display = "block";
+          document.getElementById("pollForm").style.display = "none";
+        });
+
+      document.getElementById("pollBtn").addEventListener("click", function () {
+        this.classList.add("active");
+        document.getElementById("discussionBtn").classList.remove("active");
+        document.getElementById("pollForm").style.display = "block";
+        document.getElementById("discussionForm").style.display = "none";
+      });
+
+      // Add more poll options
+      let optionCount = 2;
+      document
+        .getElementById("addOptionBtn")
+        .addEventListener("click", function () {
+          optionCount++;
+          const newOption = document.createElement("div");
+          newOption.className = "poll-option";
+          newOption.innerHTML = `<input type="text" placeholder="Option ${optionCount}">`;
+          document.getElementById("pollOptions").appendChild(newOption);
+        });
+
+      // Handle form submissions (just UI for now)
+      document
+        .getElementById("postDiscussionBtn")
+        .addEventListener("click", function () {
+          alert("Discussion posted successfully!");
+          document.getElementById("postTypeSelector").style.display = "none";
+        });
+
+      document
+        .getElementById("createPollBtn")
+        .addEventListener("click", function () {
+          alert("Poll created successfully!");
+          document.getElementById("postTypeSelector").style.display = "none";
+        });
+
+      // Initialize with discussion form visible
+      document.getElementById("discussionForm").style.display = "block";
+    </script>
+  </body>
+</html>

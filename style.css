@@ -1,0 +1,68 @@
+/*==================== GOOGLE FONTS ====================*/
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+
+/*==================== VARIABLES CSS ====================*/
+:root {
+  /*========== COLORS ==========*/
+  --first-color: hsl(238, 52%, 21%);
+  --first-color-alt: hsl(238, 41%, 43%);
+  --first-color-lighter: hsl(238, 43%, 37%);
+  --first-color-light: hsl(238, 51%, 55%);
+  --second-color: #dc3a7a;
+  --text-color: hsl(245, 23%, 21%);
+  --text-color-light: hsla(245, 23%, 21%, 0.8);
+  --light-color: #d8d8d8;
+  --white-color: white;
+
+  /*========== FONT & TYPORGRAPHY ==========*/
+  --body-font: "Poppins", sans-serif;
+
+  --h3-font-size: 1.125rem;
+  --normal-font-size: 0.938rem;
+  --small-font-size: 0.813rem;
+  --smaller-font-size: 0.75rem;
+
+  /*========== Z INDEX ==========*/
+  --z-tooltip: 10;
+  --z-fixed: 100;
+  --z-modal: 1000;
+}
+
+/*========== FONT SIZE FOR LARGER SCREENS ==========*/
+@media screen and (min-width: 968px) {
+  :root {
+    --h3-font-size: 1.25rem;
+    --normal-font-size: 1rem;
+    --small-font-size: 0.875rem;
+    --smaller-font-size: 0.813rem;
+  }
+}
+
+/*==================== BASE ====================*/
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--body-font);
+  font-size: var(--normal-font-size);
+  background-color: var(--light-color);
+  color: var(--text-color);
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/*==================== REUSABLE CSS CLASSES ====================*/
+
+/*==================== FOOTER ====================*/
+
+/*==================== MEDIA QUERIES ====================*/

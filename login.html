@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+  </head>
+  <style>
+    .login {
+      border: 1.5px solid #0057ff;
+      color: #0057ff;
+      background-color: white;
+    }
+
+    .login:hover {
+      background-color: #0057ff;
+      color: white;
+    }
+
+    .signup {
+      background-color: #0057ff;
+      color: white;
+    }
+
+    .signup:hover {
+      background-color: #003fcc;
+    }
+
+    .login-section {
+      padding: 50px;
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+    }
+
+    .login-container {
+      max-width: 400px;
+      margin: auto;
+      background: white;
+      padding: 30px 40px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .login-container h2 {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .login-form label {
+      display: block;
+      margin: 10px 0 5px;
+      font-weight: bold;
+    }
+
+    .login-form input[type="email"],
+    .login-form input[type="password"] {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 14px;
+      margin-bottom: 15px;
+    }
+
+    .remember-forgot a {
+      color: #0072ff;
+      text-decoration: none;
+    }
+
+    .remember-forgot a:hover {
+      text-decoration: underline;
+    }
+
+    .login-form button {
+      width: 100%;
+      padding: 12px;
+      background-color: #0072ff;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .login-form button:hover {
+      background-color: #005fd1;
+    }
+
+    .signup-link {
+      margin-top: 15px;
+      text-align: center;
+    }
+
+    .signup-link a {
+      color: #0072ff;
+      text-decoration: none;
+    }
+
+    .signup-link a:hover {
+      text-decoration: underline;
+    }
+  </style>
+  <body>
+    <div id="header-container"></div>
+
+    <section class="login-section">
+      <div class="login-container">
+        <h2>Login to Your Account</h2>
+        <form id="loginForm" class="login-form">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            placeholder="Enter your email"
+            required
+          />
+
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            placeholder="Enter your password"
+            required
+          />
+
+          <div class="remember-forgot">
+            <label><input type="checkbox" /> Remember me</label>
+            <a href="#">Forgot Password?</a>
+          </div>
+
+          <button type="submit">Login</button>
+
+          <p class="signup-link">
+            Don’t have an account? <a href="signup.html">Sign Up</a>
+          </p>
+        </form>
+      </div>
+    </section>
+    <div id="footer-container"></div>
+    <script>
+      function loadHTML(elementId, filePath) {
+        fetch(filePath)
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById(elementId).innerHTML = data;
+          })
+          .catch((error) => console.error("Error loading the file:", error));
+      }
+      loadHTML("header-container", "nav.html");
+      loadHTML("footer-container", "footer.html");
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault();
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const userData = JSON.parse(localStorage.getItem("userData"));
+          if (userData && userData.email === email) {
+            localStorage.setItem("isLoggedIn", "true");
+            window.location.href = "index.html";
+          } else {
+            alert("Invalid email or password.");
+          }
+        });
+    </script>
+  </body>
+</html>

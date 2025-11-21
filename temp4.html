@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="hero.css" />
+    <link rel="stylesheet" href="job.css" />
+    <title>Job Portal</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .container {
+        padding: 20px;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 30px;
+      }
+
+      .job-cards {
+        display: grid;
+        gap: 20px;
+      }
+
+      .job-card {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 6px;
+      }
+
+      .job-title {
+        margin: 0;
+        font-size: 20px;
+      }
+
+      .company-name {
+        color: #777;
+        font-size: 14px;
+      }
+
+      .job-details,
+      .job-tags,
+      .job-footer {
+        margin-top: 10px;
+      }
+
+      .tag {
+        background: #eef;
+        padding: 4px 8px;
+        margin-right: 5px;
+        display: inline-block;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+
+      .job-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .apply-btn,
+      .quick-apply {
+        padding: 6px 12px;
+        margin-left: 5px;
+        cursor: pointer;
+      }
+
+      .hero {
+        padding: 30px;
+        text-align: center;
+      }
+
+      .hero-search {
+        margin-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .hero-search div {
+        display: flex;
+        flex-direction: column;
+      }
+
+      select,
+      button {
+        padding: 8px;
+        font-size: 16px;
+        margin-top: 5px;
+      }
+
+      button {
+        cursor: pointer;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="hero">
+      <h1 class="hero-title">Discover Your Next Career Move</h1>
+      <p class="hero-subtitle">
+        Thousands of jobs tailored for students and freshers
+      </p>
+
+      <div class="hero-search">
+        <div>
+          <label for="category">Select Category:</label>
+          <select id="category">
+            <option value="">All</option>
+            <option value="Frontend">Frontend Developer</option>
+            <option value="Backend">Backend Developer</option>
+          </select>
+        </div>
+
+        <div>
+          <label for="location">Select Location:</label>
+          <select id="location">
+            <option value="">All</option>
+            <option value="Hyderabad">Hyderabad</option>
+            <option value="Chennai">Chennai</option>
+            <option value="Bangalore">Bangalore</option>
+          </select>
+        </div>
+
+        <div>
+          <label>&nbsp;</label>
+          <button id="searchBtn">Search</button>
+        </div>
+      </div>
+    </section>
+
+    <div class="container">
+      <div class="header">
+        <h1>Job Listings</h1>
+        <p>Browse through our latest job opportunities</p>
+      </div>
+
+      <div class="job-cards" id="jobsContainer">
+        <!-- Jobs will be inserted here dynamically -->
+      </div>
+    </div>
+
+    <script>
+      const jobs = [
+        {
+          title: "Frontend Developer",
+          company: "Tech Solutions",
+          type: "Permanent Job",
+          location: "Hyderabad",
+          experience: "0-2 years",
+          salary: "3-5 LPA",
+          tags: ["React", "JavaScript", "HTML"],
+          posted: "5 hrs ago",
+          badge: "Early Apply",
+        },
+        {
+          title: "Backend Developer",
+          company: "CodeHub",
+          type: "Permanent Job",
+          location: "Chennai",
+          experience: "1-3 years",
+          salary: "4-6 LPA",
+          tags: ["Node.js", "Express", "MongoDB"],
+          posted: "10 hours ago",
+          badge: "Hot Job",
+        },
+        {
+          title: "Full Stack Developer",
+          company: "Digital Innovations",
+          type: "Contract",
+          location: "Bangalore",
+          experience: "2-5 years",
+          salary: "6-10 LPA",
+          tags: ["React", "Node.js", "AWS"],
+          posted: "1 day ago",
+          badge: "Featured",
+        },
+        {
+          title: "Data Scientist",
+          company: "Analytics Pro",
+          type: "Permanent Job",
+          location: "Pune",
+          experience: "3-5 years",
+          salary: "8-12 LPA",
+          tags: ["Python", "Machine Learning", "TensorFlow"],
+          posted: "2 days ago",
+          badge: "Urgent Hiring",
+        },
+        {
+          title: "UI/UX Designer",
+          company: "Creative Minds",
+          type: "Permanent Job",
+          location: "Mumbai",
+          experience: "1-4 years",
+          salary: "5-8 LPA",
+          tags: ["Figma", "Adobe XD", "User Research"],
+          posted: "3 days ago",
+          badge: null,
+        },
+        {
+          title: "DevOps Engineer",
+          company: "Cloud Systems",
+          type: "Permanent Job",
+          location: "Gurgaon",
+          experience: "2-4 years",
+          salary: "7-10 LPA",
+          tags: ["Docker", "Kubernetes", "CI/CD"],
+          posted: "6 hours ago",
+          badge: "New",
+        },
+        {
+          title: "Mobile App Developer",
+          company: "AppWorks",
+          type: "Internship",
+          location: "Remote",
+          experience: "0-1 years",
+          salary: "Stipend",
+          tags: ["Flutter", "Dart", "Firebase"],
+          posted: "1 hour ago",
+          badge: "Fresher Friendly",
+        },
+        {
+          title: "QA Engineer",
+          company: "Quality Assurance Ltd",
+          type: "Permanent Job",
+          location: "Noida",
+          experience: "1-3 years",
+          salary: "4-7 LPA",
+          tags: ["Automation", "Selenium", "Testing"],
+          posted: "1 day ago",
+          badge: null,
+        },
+        {
+          title: "Product Manager",
+          company: "TechVision",
+          type: "Permanent Job",
+          location: "Bangalore",
+          experience: "5-8 years",
+          salary: "15-20 LPA",
+          tags: ["Agile", "Product Strategy", "Roadmapping"],
+          posted: "4 days ago",
+          badge: "Senior Role",
+        },
+        {
+          title: "Cloud Architect",
+          company: "SkyNet Solutions",
+          type: "Contract",
+          location: "Hyderabad",
+          experience: "6-10 years",
+          salary: "20-25 LPA",
+          tags: ["AWS", "Azure", "Cloud Security"],
+          posted: "1 week ago",
+          badge: "Expert Level",
+        },
+        {
+          title: "Content Writer",
+          company: "Wordsmith",
+          type: "Freelance",
+          location: "Remote",
+          experience: "1-2 years",
+          salary: "Negotiable",
+          tags: ["SEO", "Blogging", "Technical Writing"],
+          posted: "2 days ago",
+          badge: "Work From Home",
+        },
+        {
+          title: "Digital Marketing Specialist",
+          company: "Growth Hackers",
+          type: "Permanent Job",
+          location: "Mumbai",
+          experience: "2-4 years",
+          salary: "5-8 LPA",
+          tags: ["SEO", "Social Media", "PPC"],
+          posted: "3 days ago",
+          badge: null,
+        },
+        {
+          title: "HR Recruiter",
+          company: "Talent Hunt",
+          type: "Permanent Job",
+          location: "Delhi",
+          experience: "1-3 years",
+          salary: "3-6 LPA",
+          tags: ["Recruitment", "Interviewing", "Onboarding"],
+          posted: "5 days ago",
+          badge: "Immediate Joining",
+        },
+        {
+          title: "Business Analyst",
+          company: "Strategy First",
+          type: "Permanent Job",
+          location: "Pune",
+          experience: "3-5 years",
+          salary: "8-12 LPA",
+          tags: ["SQL", "Tableau", "Requirements Gathering"],
+          posted: "1 week ago",
+          badge: null,
+        },
+        {
+          title: "Cybersecurity Specialist",
+          company: "SecureNet",
+          type: "Permanent Job",
+          location: "Bangalore",
+          experience: "4-7 years",
+          salary: "12-18 LPA",
+          tags: ["Penetration Testing", "Firewalls", "Ethical Hacking"],
+          posted: "2 days ago",
+          badge: "High Priority",
+        },
+      ];
+
+      function displayJobs(filteredJobs) {
+        const container = document.getElementById("jobsContainer");
+        container.innerHTML = "";
+
+        if (filteredJobs.length === 0) {
+          container.innerHTML = "<p>No matching jobs found.</p>";
+          return;
+        }
+
+        filteredJobs.forEach((job) => {
+          const div = document.createElement("div");
+          div.className = "job-card";
+          div.innerHTML = `
+            <h2 class="job-title">${job.title}</h2>
+            <span class="company-name">${job.company}</span>
+
+            <div class="job-details">
+              <p>Type: ${job.type}</p>
+              <p>Location: ${job.location}</p>
+              <p>Experience: ${job.experience}</p>
+              <p>Salary: ${job.salary}</p>
+            </div>
+
+            <div class="job-tags">
+              ${job.tags
+                .map((tag) => `<span class="tag">${tag}</span>`)
+                .join("")}
+            </div>
+
+            <div class="job-footer">
+              <div>
+                <span class="time-posted">${job.posted}</span>
+                <span class="badge">${job.badge}</span>
+              </div>
+<div>
+  <button class="apply-btn" onclick="goToDetails(${jobs.indexOf(
+    job
+  )})">Apply</button>
+  <button class="quick-apply">Quick Apply</button>
+</div>
+
+            </div>
+          `;
+          container.appendChild(div);
+        });
+      }
+      function goToDetails(index) {
+        window.location.href = `jobdetails.html?job=${index}`;
+      }
+
+      document.getElementById("searchBtn").addEventListener("click", () => {
+        const selectedCategory = document.getElementById("category").value;
+        const selectedLocation = document.getElementById("location").value;
+
+        const filteredJobs = jobs.filter((job) => {
+          const matchesCategory =
+            !selectedCategory ||
+            job.title.toLowerCase().includes(selectedCategory.toLowerCase());
+
+          const matchesLocation =
+            !selectedLocation ||
+            job.location.toLowerCase() === selectedLocation.toLowerCase();
+
+          return matchesCategory && matchesLocation;
+        });
+
+        displayJobs(filteredJobs);
+      });
+
+      // Initial display (optional: show all jobs at start)
+      displayJobs(jobs);
+    </script>
+  </body>
+</html>

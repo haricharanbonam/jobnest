@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Household Carbon Calculator</title>
+    <link rel="stylesheet" href="carboncalc.css" />
+  </head>
+  <body>
+    <div class="calculator-container">
+      <h1>Household Carbon Calculator</h1>
+
+      <form id="carbon-form">
+        <div class="form-section">
+          <h2>⚡ Electricity Usage</h2>
+          <label for="electricity">Monthly kWh usage:</label>
+          <input type="number" id="electricity" required />
+
+          <label for="energy-source">Primary energy source:</label>
+          <select id="energy-source">
+            <option value="grid">Grid Average</option>
+            <option value="renewable">100% Renewable</option>
+            <option value="coal">Coal-heavy</option>
+          </select>
+        </div>
+
+        <div class="form-section">
+          <h2>🚗 Transportation</h2>
+          <label for="car-miles">Weekly car miles:</label>
+          <input type="number" id="car-miles" />
+
+          <label for="car-type">Vehicle type:</label>
+          <select id="car-type">
+            <option value="gasoline">Gasoline Car</option>
+            <option value="hybrid">Hybrid</option>
+            <option value="electric">Electric Vehicle</option>
+          </select>
+        </div>
+
+        <div class="form-section">
+          <h2>🍽️ Dietary Habits</h2>
+          <label for="meat-consumption">Meat meals per week:</label>
+          <input type="number" id="meat-consumption" />
+
+          <label for="dairy-consumption">Dairy consumption (servings/week):</label>
+          <input type="number" id="dairy-consumption" />
+        </div>
+
+        <button type="submit">Calculate My Footprint</button>
+      </form>
+
+      <div id="results" class="hidden">
+        <h2>Your Carbon Footprint</h2>
+        <div id="visualization"></div>
+        <div id="recommendations"></div>
+      </div>
+    </div>
+
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="carboncalc.js"></script>
+  </body>
+</html>

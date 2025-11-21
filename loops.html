@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Mastering Loops in JavaScript</title>
+    <link rel="stylesheet" href="css/blog.css" />
+  </head>
+  <style>
+    body {
+      font-family: "Segoe UI", sans-serif;
+      background: #fefefe;
+      color: #333;
+      line-height: 1.7;
+      margin: 0;
+      padding: 0;
+    }
+
+    .blog-container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      text-decoration: none;
+      color: #6a11cb;
+      font-weight: bold;
+    }
+
+    .back-btn:hover {
+      text-decoration: underline;
+    }
+
+    h1 {
+      font-size: 32px;
+      margin-bottom: 10px;
+      color: #222;
+    }
+
+    .meta {
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 30px;
+    }
+
+    .blog-content h2 {
+      margin-top: 30px;
+      color: #6a11cb;
+    }
+
+    .blog-content ul {
+      padding-left: 20px;
+      margin: 10px 0;
+    }
+
+    .blog-content li {
+      margin-bottom: 8px;
+    }
+
+    pre {
+      background: #f4f4f4;
+      padding: 15px;
+      border-radius: 8px;
+      overflow-x: auto;
+    }
+
+    code {
+      font-family: monospace;
+      color: #2b2b2b;
+    }
+  </style>
+  <body>
+    <div class="blog-container">
+      <a href="courses.html" class="back-btn">← Back to Courses</a>
+
+      <h1>Mastering Loops in JavaScript</h1>
+      <p class="meta">Topic: Loops &nbsp;|&nbsp; Language: JavaScript</p>
+
+      <div class="blog-content">
+        <h2>1. Why Loops?</h2>
+        <p>
+          Loops help you repeat a block of code efficiently without writing it
+          multiple times.
+        </p>
+
+        <h2>2. Types of Loops in JS</h2>
+        <ul>
+          <li>
+            <strong>for</strong> – runs a block for a specific number of times
+          </li>
+          <li><strong>while</strong> – runs while a condition is true</li>
+          <li>
+            <strong>do...while</strong> – runs at least once before checking
+            condition
+          </li>
+          <li>
+            <strong>for...of</strong> – loops through iterable objects (like
+            arrays)
+          </li>
+          <li><strong>for...in</strong> – loops through object properties</li>
+        </ul>
+
+        <h2>3. Examples</h2>
+
+        <pre><code>// for loop
+for (let i = 0; i < 5; i++) {
+  console.log("Hello World " + i);
+}
+
+// while loop
+let i = 0;
+while (i < 5) {
+  console.log("Number " + i);
+  i++;
+}
+
+// for...of
+const fruits = ["apple", "banana", "cherry"];
+for (const fruit of fruits) {
+  console.log(fruit);
+}
+      </code></pre>
+
+        <h2>4. Use Cases</h2>
+        <ul>
+          <li>Displaying list of items</li>
+          <li>Repetitive calculations</li>
+          <li>Traversing arrays or objects</li>
+        </ul>
+
+        <h2>5. Best Practices</h2>
+        <ul>
+          <li>Avoid infinite loops – always define a stopping condition</li>
+          <li>
+            Use <code>forEach</code> or <code>map</code> for cleaner array
+            iterations when possible
+          </li>
+        </ul>
+
+        <p>
+          Loops are essential in programming and mastering them helps you write
+          efficient, clean, and reusable code.
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
