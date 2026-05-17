@@ -1,0 +1,1144 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+    <link rel="stylesheet" href="home-comp.css" />
+    <style>
+      .home {
+        color: red;
+        position: relative;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .home::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: -5px;
+        width: 100%;
+        height: 2px;
+        background-color: red;
+      }
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        line-height: 1.6;
+        color: #333;
+      }
+
+      /* Header/Footer Containers */
+      #header-container,
+      #footer-container {
+        width: 100%;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 80px 20px;
+        text-align: center;
+        background: linear-gradient(to right, #4facfe, #00f2fe);
+        color: white;
+      }
+
+      .hero-title {
+        font-size: 36px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .hero-subtitle {
+        font-size: 18px;
+        margin-bottom: 30px;
+      }
+
+      /* Search Components */
+      .hero-search {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 20px;
+        margin-top: 30px;
+      }
+
+      .category-selector {
+        position: relative;
+        background: white;
+        border-radius: 10px;
+        width: 250px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+      }
+
+      .selected-category {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        font-weight: bold;
+        color: #333;
+      }
+
+      .selected-category i:first-child {
+        margin-right: 10px;
+      }
+
+      .category-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        background: white;
+        width: 100%;
+        border-radius: 0 0 10px 10px;
+        border-top: 1px solid #ddd;
+        max-height: 250px;
+        overflow-y: auto;
+        z-index: 10;
+      }
+
+      .category-selector.active .category-dropdown {
+        display: block;
+      }
+
+      .category-option {
+        display: flex;
+        align-items: flex-start;
+        padding: 10px 16px;
+        border-bottom: 1px solid #f1f1f1;
+        transition: background 0.2s ease;
+      }
+
+      .category-option:hover {
+        background: #f0f0f0;
+      }
+
+      .category-option i {
+        font-size: 20px;
+        margin-right: 12px;
+        margin-top: 4px;
+        color: #4facfe;
+      }
+
+      .category-option h4 {
+        margin: 0;
+        font-size: 16px;
+        font-weight: 600;
+      }
+
+      .category-option p {
+        margin: 2px 0 0;
+        font-size: 13px;
+        color: #666;
+      }
+
+      /* Location Selector */
+      .location-selector {
+        position: relative;
+        width: 250px;
+      }
+
+      .location-dropdown {
+        width: 100%;
+        padding: 12px 40px 12px 16px;
+        border-radius: 10px;
+        border: none;
+        font-size: 15px;
+        background: white;
+        appearance: none;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .location-selector i {
+        position: absolute;
+        right: 16px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #4facfe;
+        pointer-events: none;
+      }
+
+      /* Search Button */
+      .search-btn {
+        background: #333;
+        color: white;
+        padding: 12px 20px;
+        border: none;
+        border-radius: 10px;
+        font-size: 15px;
+        cursor: pointer;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        transition: background 0.3s ease;
+      }
+
+      .search-btn i {
+        margin-right: 8px;
+      }
+
+      .search-btn:hover {
+        background: #555;
+      }
+
+      /* Recruiter Section */
+      .recruiter-section {
+        padding: 60px 40px;
+        background-color: #f9f9f9;
+      }
+
+      .recruiter-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 1200px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+      }
+
+      .recruiter-image img {
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      }
+
+      .recruiter-text {
+        width: 100%;
+        max-width: 500px;
+        padding: 20px;
+      }
+
+      .recruiter-text h2 {
+        font-size: 28px;
+        margin-bottom: 15px;
+        color: #333;
+      }
+
+      .recruiter-text p {
+        font-size: 16px;
+        margin-bottom: 25px;
+        color: #555;
+      }
+
+      .recruiter-text button {
+        padding: 12px 24px;
+        background-color: #e67e22;
+        color: white;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      }
+
+      .recruiter-text button:hover {
+        background-color: #cf711b;
+      }
+
+      /* Test Section */
+      .test-section {
+        background-color: #f9f9f9;
+        padding: 60px 20px;
+      }
+
+      .test-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        max-width: 1100px;
+        margin: 0 auto;
+        flex-wrap: wrap;
+        gap: 40px;
+      }
+
+      .test-image {
+        flex: 1;
+        min-width: 300px;
+        text-align: center;
+      }
+
+      .test-image img {
+        width: 100%;
+        max-width: 400px;
+        border-radius: 12px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      .test-content {
+        flex: 1;
+        min-width: 300px;
+      }
+
+      .test-content h2 {
+        font-size: 28px;
+        color: #333;
+        margin-bottom: 15px;
+      }
+
+      .test-content p {
+        font-size: 16px;
+        color: #555;
+        margin-bottom: 25px;
+      }
+
+      .test-btn {
+        display: inline-block;
+        padding: 12px 25px;
+        background-color: #007bff;
+        color: white;
+        text-decoration: none;
+        border-radius: 6px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+      }
+
+      .test-btn:hover {
+        background-color: #0069d9;
+      }
+
+      /* Companies Section */
+      .companies-section {
+        padding: 60px 20px;
+        text-align: center;
+        background-color: #fff;
+      }
+
+      .companies-heading {
+        font-size: 32px;
+        color: #2d3748;
+        margin-bottom: 20px;
+        position: relative;
+        display: inline-block;
+      }
+
+      .companies-heading::after {
+        content: "";
+        position: absolute;
+        bottom: -10px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background-color: #2563eb;
+      }
+
+      .companies-description {
+        color: #4a5568;
+        font-size: 16px;
+        max-width: 700px;
+        margin: 0 auto 30px;
+        line-height: 1.6;
+      }
+
+      .companies-logo-container {
+        background-color: #f8fafc;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        max-width: 1000px;
+        margin: 0 auto;
+      }
+
+      .companies-logo {
+        max-width: 100%;
+        height: auto;
+        border-radius: 5px;
+      }
+
+      /* App Promo Section */
+      .app-promo {
+        background: linear-gradient(135deg, #2563eb 0%, #1e40af 100%);
+        color: white;
+        padding: 40px 20px;
+        text-align: center;
+        font-family: Arial, sans-serif;
+        margin: 40px auto;
+        max-width: 1200px;
+        border-radius: 10px;
+      }
+
+      .jobnest-logo {
+        font-size: 32px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+
+      .app-title {
+        font-size: 24px;
+        margin-bottom: 10px;
+      }
+
+      .app-tagline {
+        font-size: 16px;
+        margin-bottom: 30px;
+        opacity: 0.9;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .download-buttons {
+        display: flex;
+        justify-content: center;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .download-btn {
+        padding: 12px 20px;
+        border-radius: 6px;
+        font-size: 16px;
+        color: #2563eb;
+        background: white;
+        text-decoration: none;
+        font-weight: bold;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        transition: transform 0.2s ease;
+      }
+
+      .download-btn:hover {
+        transform: translateY(-2px);
+      }
+
+      .download-btn svg {
+        width: 20px;
+        height: 20px;
+      }
+      /* General styles */
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        padding: 0;
+      }
+
+      .faq-container {
+        max-width: 95%;
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      h2 {
+        color: #333;
+        margin-bottom: 20px;
+        font-size: 24px;
+      }
+
+      .faq-item {
+        margin-bottom: 10px;
+        border-bottom: 1px solid #e0e0e0;
+      }
+
+      .faq-question {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        padding: 15px 0;
+      }
+
+      .faq-question span {
+        font-size: 18px;
+        color: #333;
+      }
+
+      .toggle-button {
+        background-color: transparent;
+        border: none;
+        font-size: 20px;
+        color: #333;
+        cursor: pointer;
+        transition: color 0.3s ease;
+      }
+
+      .toggle-button:hover {
+        color: #007bff;
+      }
+
+      .faq-answer {
+        padding: 10px 0;
+        display: none;
+      }
+
+      .faq-answer p {
+        font-size: 16px;
+        color: #555;
+        line-height: 1.6;
+      }
+
+      .stats-container {
+        max-width: 1200px;
+        margin: 50px auto;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+        display: flex;
+        justify-content: space-around;
+        padding: 20px;
+      }
+
+      .stat-item {
+        text-align: center;
+        flex: 1;
+      }
+
+      .stat-item h3 {
+        font-size: 18px;
+        color: #333;
+        margin: 0;
+      }
+
+      .stat-value {
+        font-size: 24px;
+        color: #007bff;
+        font-weight: bold;
+        margin-top: 5px;
+      }
+
+      .slider {
+        text-align: center;
+        padding: 30px;
+        background: #fff;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        margin: 50px auto;
+        max-width: 1200px;
+      }
+
+      .slider h1 {
+        font-size: 28px;
+        margin-bottom: 20px;
+        color: #333;
+      }
+
+      .job-slider-container {
+        position: relative;
+        overflow: hidden;
+        width: 100%;
+      }
+
+      .job-slider {
+        display: flex;
+        gap: 20px;
+        transition: transform 0.5s ease;
+        padding: 0 20px;
+      }
+
+      .job-card {
+        border: 1px solid #ccc;
+        padding: 20px;
+        border-radius: 6px;
+        background-color: #fff;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        flex: 0 0 300px; /* Fixed width for each job card */
+        min-width: 300px;
+      }
+
+      .job-title {
+        margin: 0;
+        font-size: 20px;
+        color: #333;
+      }
+
+      .company-name {
+        color: #777;
+        font-size: 14px;
+      }
+
+      .job-details,
+      .job-tags,
+      .job-footer {
+        margin-top: 10px;
+      }
+
+      .tag {
+        background: #eef;
+        padding: 4px 8px;
+        margin-right: 5px;
+        display: inline-block;
+        border-radius: 4px;
+        font-size: 12px;
+      }
+
+      .job-footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .apply-btn,
+      .quick-apply {
+        padding: 6px 12px;
+        margin-left: 5px;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .apply-btn {
+        background-color: #007bff;
+        color: white;
+      }
+
+      .quick-apply {
+        background-color: #28a745;
+        color: white;
+      }
+
+      .slider-btn {
+        position: absolute;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: rgba(0, 0, 0, 0.5);
+        color: white;
+        border: none;
+        font-size: 24px;
+        padding: 10px;
+        cursor: pointer;
+        border-radius: 50%;
+        z-index: 10;
+      }
+
+      .prev {
+        left: 10px;
+      }
+
+      .next {
+        right: 10px;
+      }
+    </style>
+
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="header-container"></div>
+    <section class="hero">
+      <h1 class="hero-title">Discover Your Next Career Move</h1>
+      <p class="hero-subtitle">
+        Thousands of jobs tailored for students and freshers
+      </p>
+
+      <div class="hero-search">
+        <div class="category-selector">
+          <div class="selected-category">
+            <i class="fas fa-briefcase"></i>
+            <span>Select job category</span>
+            <i class="fas fa-chevron-down"></i>
+          </div>
+          <div class="category-dropdown">
+            <div class="category-option">
+              <i class="fas fa-laptop-house"></i>
+              <div>
+                <h4>Work From Home</h4>
+                <p>Remote job opportunities</p>
+              </div>
+            </div>
+            <div class="category-option">
+              <i class="fas fa-users"></i>
+              <div>
+                <h4>HR</h4>
+                <p>Human Resources positions</p>
+              </div>
+            </div>
+            <div class="category-option">
+              <i class="fas fa-handshake"></i>
+              <div>
+                <h4>Sales</h4>
+                <p>Sales and business development</p>
+              </div>
+            </div>
+            <div class="category-option">
+              <i class="fas fa-calculator"></i>
+              <div>
+                <h4>Accounting</h4>
+                <p>Finance and accounting roles</p>
+              </div>
+            </div>
+            <div class="category-option">
+              <i class="fas fa-headset"></i>
+              <div>
+                <h4>Customer Support</h4>
+                <p>Client service positions</p>
+              </div>
+            </div>
+            <div class="category-option">
+              <i class="fas fa-laptop-code"></i>
+              <div>
+                <h4>IT</h4>
+                <p>Information technology jobs</p>
+              </div>
+            </div>
+            <div class="category-option">
+              <i class="fas fa-database"></i>
+              <div>
+                <h4>SQL</h4>
+                <p>Database management roles</p>
+              </div>
+            </div>
+            <div class="category-option">
+              <i class="fas fa-server"></i>
+              <div>
+                <h4>Oracle</h4>
+                <p>Oracle specialist positions</p>
+              </div>
+            </div>
+            <div class="category-option">
+              <i class="fas fa-paint-brush"></i>
+              <div>
+                <h4>Graphic Design</h4>
+                <p>Creative design jobs</p>
+              </div>
+            </div>
+            <div class="category-option">
+              <i class="fas fa-bullhorn"></i>
+              <div>
+                <h4>Digital Marketing</h4>
+                <p>Online marketing positions</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="location-selector">
+          <select class="location-dropdown">
+            <option value="" disabled selected>Select location</option>
+            <option value="hyderabad">Hyderabad</option>
+            <option value="mumbai">Mumbai</option>
+            <option value="pune">Pune</option>
+            <option value="chennai">Chennai</option>
+          </select>
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+
+        <button class="search-btn" onclick="window.location.href='temp4.html'">
+          <i class="fa-solid fa-magnifying-glass"></i> Search Jobs
+        </button>
+      </div>
+    </section>
+    <div class="stats-container">
+      <div class="stat-item">
+        <h3>Jobs Posted</h3>
+        <span class="stat-value">25,000+</span>
+      </div>
+      <div class="stat-item">
+        <h3>Candidates Reached</h3>
+        <span class="stat-value">1,200,000+</span>
+      </div>
+      <div class="stat-item">
+        <h3>Companies Onboarded</h3>
+        <span class="stat-value">850+</span>
+      </div>
+      <div class="stat-item">
+        <h3>Applications Submitted</h3>
+        <span class="stat-value">90,000+</span>
+      </div>
+    </div>
+    <div
+      class="slider"
+      style="cursor: pointer"
+      onclick="window.href.location=temp4.html"
+    >
+      <h1>Featured Jobs</h1>
+      <div class="job-slider-container">
+        <button class="slider-btn prev" onclick="scrollSlider('left')">
+          &#10094;
+        </button>
+        <div class="job-slider" id="jobSlider">
+          <!-- Job cards will be dynamically inserted here -->
+        </div>
+        <button class="slider-btn next" onclick="scrollSlider('right')">
+          &#10095;
+        </button>
+      </div>
+      <a
+        href="temp4.html"
+        style="
+          color: #007bff;
+          text-decoration: none;
+          font-weight: bold;
+          font-size: 16px;
+        "
+        onmouseover="this.style.textDecoration='underline'"
+        onmouseout="this.style.textDecoration='none'"
+        >Click here to Browse more</a
+      >
+    </div>
+
+    <section class="recruiter-section">
+      <div class="recruiter-container">
+        <div class="recruiter-image">
+          <img src="images/recruiter.png" alt="Recruiter Image" />
+        </div>
+        <div class="recruiter-text">
+          <h2>Find the Right Talent, Fast</h2>
+          <p>
+            Hire smarter, faster. Post a job and connect with professionals who
+            matter.
+          </p>
+          <button onclick="location.href='recruitlogin.html'">
+            Post a Job
+          </button>
+        </div>
+      </div>
+    </section>
+    <section style="background-color: #f9f9f9; padding: 50px 0">
+      <div
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          max-width: 1100px;
+          margin: auto;
+          flex-wrap: wrap;
+        "
+      >
+        <div
+          style="flex: 1; padding: 20px; min-width: 300px; text-align: center"
+        >
+          <img
+            src="./images/test.png"
+            style="
+              width: 100%;
+              max-width: 400px;
+              border-radius: 12px;
+              box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            "
+          />
+        </div>
+
+        <div style="flex: 1; padding: 20px; min-width: 300px">
+          <h2 style="font-size: 28px; color: #333; margin-bottom: 10px">
+            Challenge Yourself!
+          </h2>
+          <p style="font-size: 18px; color: #555; margin-bottom: 20px">
+            Try to improve yourself. Start today. Every step counts towards your
+            dream.
+          </p>
+          <a
+            href="upskill.html"
+            style="
+              display: inline-block;
+              padding: 12px 25px;
+              background-color: #007bff;
+              color: white;
+              text-decoration: none;
+              border-radius: 6px;
+              font-weight: bold;
+            "
+          >
+            Upskill Yourself
+          </a>
+        </div>
+      </div>
+    </section>
+    <body>
+      <section class="companies-section">
+        <h2 class="companies-heading">Our Companies</h2>
+        <p class="companies-description">
+          We're proud to partner with leading organizations across industries to
+          provide exceptional placement opportunities for our students.
+        </p>
+
+        <div class="companies-logo-container">
+          <img
+            src="https://srkrec.edu.in/img/tp/placement_partners_1.jpg"
+            alt="Our Placement Partners"
+            class="companies-logo"
+          />
+        </div>
+      </section>
+      <div class="app-promo">
+        <div class="jobnest-logo">JobNest</div>
+        <div class="app-title">Get the app</div>
+        <div class="app-tagline">
+          Get the power of JobNest on-the-go, featuring one-touch apply
+        </div>
+        <div class="download-buttons">
+          <a href="#" class="download-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516.024.034 1.52.087 2.475-1.258.955-1.345.762-2.391.728-2.43zm3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422.212-2.189 1.675-2.789 1.698-2.854.023-.065-.597-.79-1.254-1.157a3.692 3.692 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56.244.729.625 1.924 1.273 2.796.576.984 1.34 1.667 1.659 1.899.319.232 1.219.386 1.843.067.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758.347-.79.505-1.217.473-1.282z"
+              />
+              <path
+                d="M11.182.008C11.148-.03 9.923.023 8.857 1.18c-1.066 1.156-.902 2.482-.878 2.516.024.034 1.52.087 2.475-1.258.955-1.345.762-2.391.728-2.43zm3.314 11.733c-.048-.096-2.325-1.234-2.113-3.422.212-2.189 1.675-2.789 1.698-2.854.023-.065-.597-.79-1.254-1.157a3.692 3.692 0 0 0-1.563-.434c-.108-.003-.483-.095-1.254.116-.508.139-1.653.589-1.968.607-.316.018-1.256-.522-2.267-.665-.647-.125-1.333.131-1.824.328-.49.196-1.422.754-2.074 2.237-.652 1.482-.311 3.83-.067 4.56.244.729.625 1.924 1.273 2.796.576.984 1.34 1.667 1.659 1.899.319.232 1.219.386 1.843.067.502-.308 1.408-.485 1.766-.472.357.013 1.061.154 1.782.539.571.197 1.111.115 1.652-.105.541-.221 1.324-1.059 2.238-2.758.347-.79.505-1.217.473-1.282z"
+              />
+            </svg>
+            App Store
+          </a>
+          <a href="#" class="download-btn">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="16"
+              height="16"
+              fill="currentColor"
+              viewBox="0 0 16 16"
+            >
+              <path
+                d="M14.222 9.374c1.037-.61 1.037-2.137 0-2.748L11.528 5.04 8.32 8l3.207 2.96 2.694-1.586Zm-3.595 2.17L7.583 8.68 1.03 14.73c.201 1.029 1.36 1.61 2.303 1.055l7.294-4.24ZM1 13.396V2.603L6.846 8 1 13.396ZM1.03 1.27l6.553 6.05 3.044-2.81L3.333.215C2.39-.341 1.231.24 1.03 1.27Z"
+              />
+            </svg>
+            Google Play
+          </a>
+        </div>
+      </div>
+    </body>
+    <div class="faq-container">
+      <h2>FAQs</h2>
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>What is JobNest?</span>
+          <button class="toggle-button">+</button>
+        </div>
+        <div class="faq-answer">
+          <p>
+            JobNest is an online platform that connects job seekers and
+            recruiters. We provide a seamless experience for candidates to apply
+            for jobs and for employers to find the right talent.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How do I create an account on JobNest?</span>
+          <button class="toggle-button">+</button>
+        </div>
+        <div class="faq-answer">
+          <p>
+            To create an account, click the "Sign Up" button on the homepage.
+            Fill in your details, choose whether you're a job seeker or a
+            recruiter, and complete the registration process.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-question">
+          <span>How can I apply for a job on JobNest?</span>
+          <button class="toggle-button">+</button>
+        </div>
+        <div class="faq-answer">
+          <p>
+            After signing in, browse through available job listings based on
+            your skills and preferences. Click on the job you’re interested in,
+            review the details, and click "Apply" to submit your application.
+          </p>
+        </div>
+      </div>
+
+      <!-- Add more FAQ items as needed -->
+    </div>
+    <div id="footer-container"></div>
+
+    <script>
+      function loadHTML(elementId, filePath, callback) {
+        fetch(filePath)
+          .then((response) => response.text())
+          .then((data) => {
+            document.getElementById(elementId).innerHTML = data;
+            if (callback) callback(); // important
+          })
+          .catch((error) => console.error("Error loading the file:", error));
+      }
+
+      function updateNavbar() {
+        const navRight = document.getElementById("navRight");
+        const isLoggedIn = localStorage.getItem("isLoggedIn") === "true";
+        let user = null;
+        try {
+          user = JSON.parse(localStorage.getItem("userData"));
+          console.log(user);
+        } catch {}
+
+        if (isLoggedIn && user) {
+          navRight.innerHTML = `
+        <i class="fas fa-user-circle profile-icon" onclick="window.location.href='profile.html'" title="${user.name}"></i>
+      `;
+        } else {
+          navRight.innerHTML = `
+        <button class="btn login" onclick="window.location.href='login.html'">Login</button>
+        <button class="btn signup" onclick="window.location.href='signup.html'">Sign Up</button>
+      `;
+        }
+      }
+
+      // Use callback properly now
+      loadHTML("header-container", "nav.html", updateNavbar);
+      loadHTML("faq-container", "faq.html");
+      loadHTML("footer-container", "footer.html");
+      document
+        .querySelector(".selected-category")
+        .addEventListener("click", function () {
+          document
+            .querySelector(".category-selector")
+            .classList.toggle("active");
+        });
+
+      // Close dropdown when clicking on an option
+      document.querySelectorAll(".category-option").forEach((option) => {
+        option.addEventListener("click", function () {
+          const categoryName = this.querySelector("h4").textContent;
+          document.querySelector(".selected-category span").textContent =
+            categoryName;
+          document
+            .querySelector(".category-selector")
+            .classList.remove("active");
+        });
+      });
+
+      // Close dropdown when clicking outside
+      document.addEventListener("click", function (e) {
+        if (!e.target.closest(".category-selector")) {
+          document
+            .querySelector(".category-selector")
+            .classList.remove("active");
+        }
+      });
+      document.querySelectorAll(".faq-item").forEach((item) => {
+        const question = item.querySelector(".faq-question");
+        const answer = item.querySelector(".faq-answer");
+
+        question.addEventListener("click", () => {
+          // Toggle the visibility of the answer
+          if (answer.style.display === "block") {
+            answer.style.display = "none";
+            question.querySelector(".toggle-button").textContent = "+";
+          } else {
+            answer.style.display = "block";
+            question.querySelector(".toggle-button").textContent = "-";
+          }
+        });
+      });
+      // Sample job data
+      const jobs = [
+        {
+          title: "Frontend Developer",
+          company: "Tech Solutions",
+          type: "Permanent Job",
+          location: "Hyderabad",
+          experience: "0-2 years",
+          salary: "3-5 LPA",
+          tags: ["React", "JavaScript", "HTML"],
+          posted: "5 hrs ago",
+          badge: "Early Apply",
+        },
+        {
+          title: "Backend Developer",
+          company: "CodeHub",
+          type: "Permanent Job",
+          location: "Chennai",
+          experience: "1-3 years",
+          salary: "4-6 LPA",
+          tags: ["Node.js", "Express", "MongoDB"],
+          posted: "10 hours ago",
+          badge: "Hot Job",
+        },
+        {
+          title: "Full Stack Developer",
+          company: "Digital Innovations",
+          type: "Contract",
+          location: "Bangalore",
+          experience: "2-5 years",
+          salary: "6-10 LPA",
+          tags: ["React", "Node.js", "AWS"],
+          posted: "1 day ago",
+          badge: "Featured",
+        },
+        {
+          title: "Data Scientist",
+          company: "Analytics Pro",
+          type: "Permanent Job",
+          location: "Pune",
+          experience: "3-5 years",
+          salary: "8-12 LPA",
+          tags: ["Python", "Machine Learning", "TensorFlow"],
+          posted: "2 days ago",
+          badge: "Urgent Hiring",
+        },
+        {
+          title: "UI/UX Designer",
+          company: "Creative Minds",
+          type: "Permanent Job",
+          location: "Mumbai",
+          experience: "1-4 years",
+          salary: "5-8 LPA",
+          tags: ["Figma", "Adobe XD", "User Research"],
+          posted: "3 days ago",
+          badge: null,
+        },
+      ];
+
+      // Function to generate job cards dynamically
+      function generateJobCards() {
+        const slider = document.getElementById("jobSlider");
+        slider.innerHTML = jobs
+          .map(
+            (job) => `
+        <div class="job-card">
+          <h2 class="job-title">${job.title}</h2>
+          <span class="company-name">${job.company}</span>
+          <div class="job-details">
+            <p>Type: ${job.type}</p>
+            <p>Location: ${job.location}</p>
+            <p>Experience: ${job.experience}</p>
+            <p>Salary: ${job.salary}</p>
+          </div>
+          <div class="job-tags">
+            ${job.tags.map((tag) => `<span class="tag">${tag}</span>`).join("")}
+          </div>
+          <div class="job-footer">
+            <div>
+              <span class="time-posted">${job.posted}</span>
+              <span class="badge">${job.badge || ""}</span>
+            </div>
+            <div>
+              <button class="apply-btn">Apply</button>
+              <button class="quick-apply">Quick Apply</button>
+            </div>
+          </div>
+        </div>
+      `
+          )
+          .join("");
+      }
+
+      // Slider functionality
+      let currentIndex = 0;
+
+      function scrollSlider(direction) {
+        const slider = document.getElementById("jobSlider");
+        const cardWidth = 340; // Width of each card including gap
+        if (direction === "left") {
+          currentIndex = Math.min(currentIndex + 1, 0);
+        } else if (direction === "right") {
+          currentIndex = Math.max(currentIndex - 1, -(jobs.length - 3)); // Adjust based on visible cards
+        }
+        slider.style.transform = `translateX(${currentIndex * cardWidth}px)`;
+      }
+
+      // Initialize job cards on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        generateJobCards();
+      });
+    </script>
+  </body>
+</html>
